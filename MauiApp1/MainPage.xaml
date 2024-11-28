@@ -29,6 +29,14 @@
                        TextChanged="OnSearchTextChanged"
                        x:Name="SearchBarControl" />
 
+            <Button 
+                        Text="Hent jobdetaljer" 
+                        Clicked="OnFetchJobDetailsClicked" 
+                        HorizontalOptions="Fill" />
+            <Label 
+                        x:Name="JobDetailLabel"
+                        Text="Ingen jobdata endnu."
+                        Style="{StaticResource SubHeadline}" />
 
 
             <CollectionView x:Name="FilteredCollectionView" ItemsSource="{Binding FilteredItems}">
