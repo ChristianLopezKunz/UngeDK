@@ -2,30 +2,20 @@
 {
     public partial class MainPage : ContentPage
     {
-        int count = 0;
-
-        public Command MyCommand { get; }
+        private MainViewModel viewModel;
 
         public MainPage()
         {
             InitializeComponent();
+
+            viewModel = new MainViewModel();
+            BindingContext = viewModel;
         }
 
-        private void OnCounterClicked(object sender, EventArgs e)
+        private void OnSearchTextChanged(object sender, TextChangedEventArgs e)
         {
-            count++;
-
-            if (count == 1)
-                CounterBtn.Text = $"Clicked {count} time";
-            else
-                CounterBtn.Text = $"Clicked {count} times";
-
-            SemanticScreenReader.Announce(CounterBtn.Text);
-        }
-
-        private void OnClicked()
-        {
-            Console.WriteLine("Button was clicked!");
+            // Opdater den filtrerede liste baseret på søgetekst
+            viewModel.FilterItems(e.NewTextValue);
         }
 
     }
