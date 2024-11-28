@@ -63,6 +63,4 @@ namespace MauiApp1
             }
         }
     }
-
-
 }
