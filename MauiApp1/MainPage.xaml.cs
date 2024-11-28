@@ -4,6 +4,8 @@
     {
         int count = 0;
 
+        public Command MyCommand { get; }
+
         public MainPage()
         {
             InitializeComponent();
@@ -20,6 +22,12 @@
 
             SemanticScreenReader.Announce(CounterBtn.Text);
         }
+
+        private void OnClicked()
+        {
+            Console.WriteLine("Button was clicked!");
+        }
+
     }
 
 }
