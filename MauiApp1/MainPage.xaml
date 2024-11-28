@@ -29,6 +29,8 @@
                        TextChanged="OnSearchTextChanged"
                        x:Name="SearchBarControl" />
 
+
+
             <CollectionView x:Name="FilteredCollectionView" ItemsSource="{Binding FilteredItems}">
                 <CollectionView.ItemTemplate>
                     <DataTemplate>
