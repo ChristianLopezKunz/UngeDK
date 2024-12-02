@@ -5,52 +5,48 @@ namespace MauiApp1
 {
     public partial class MainPage : ContentPage
     {
-        private MainViewModel viewModel;
-        private readonly ApiService _apiService = new ApiService();
+        private MainViewModel viewModel; // ViewModel instance
+        private readonly ApiService _apiService = new ApiService(); // API Service
 
         public MainPage()
         {
             InitializeComponent();
-            viewModel = new MainViewModel();
-            BindingContext = viewModel;
+            viewModel = new MainViewModel(); // Initialize ViewModel
+            BindingContext = viewModel; // Bind ViewModel to the UI
         }
 
-        // Opdater filter på søgetekstændringer
-        private void OnSearchTextChanged(object sender, TextChangedEventArgs e)
+        // Håndter ændringer i søgefeltet dynamisk
+        private async void OnSearchTextChanged(object sender, TextChangedEventArgs e)
         {
-            viewModel.FilterItems(e.NewTextValue);
-        }
+            string keyword = e.NewTextValue?.Trim(); // Søgeord fra feltet
 
-        // Når knappen trykkes for at hente jobdetaljer
-        private async void OnFetchJobDetailsClicked(object sender, EventArgs e)
-        {
-            int jobId = 2678108;  // Test med et eksempel jobID
-
-            // Hent jobdetaljer via ApiService
-            var jobDetails = await _apiService.GetJobDetailAsync(jobId);
-
-            if (jobDetails != null && jobDetails.Status == "ok")
+            if (string.IsNullOrEmpty(keyword))
             {
-                // Hvis jobdetaljer findes, vis dem
-                await DisplayAlert("Job Details",
-                    $"Job Title: {jobDetails.Data.JobTitle}\n" +
-                    $"Company: {jobDetails.Data.CompanyName}\n" +
-                    $"Apply: {jobDetails.Data.ApplicationUrl}",
-                    "OK");
+                // Hvis søgefeltet er tomt, ryd FilteredItems
+                viewModel.FilteredItems.Clear();
+                return;
+            }
+
+            // Dynamisk søgning via API
+            int maxResults = 50;
+            int page = 1;
+
+            var jobList = await _apiService.GetJobsAsync(keyword, maxResults, page);
+
+            if (jobList != null && jobList.Status == "ok")
+            {
+                // Opdater FilteredItems i ViewModel med nye resultater
+                viewModel.FilteredItems.Clear();
+                foreach (var job in jobList.Jobs)
+                {
+                    viewModel.FilteredItems.Add($"{job.JobTitle} at {job.CompanyName}");
+                }
             }
             else
             {
-                // Hvis jobdetaljer ikke kan hentes, vis en fejl
-                await DisplayAlert("Error", "Kunne ikke hente jobdetaljer.", "OK");
-            }
-        }
-
-        // Håndter tema skift-knap
-        private void OnToggleThemeButtonClicked(object sender, EventArgs e)
-        {
-            if (Application.Current is App app)
-            {
-                app.ToggleTheme(); // Kalder App-klassens metode for at skifte tema
+                // Hvis ingen jobs findes eller fejl opstår
+                viewModel.FilteredItems.Clear();
+                viewModel.FilteredItems.Add("Ingen resultater fundet.");
             }
         }
     }

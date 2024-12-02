@@ -22,30 +22,21 @@
                 SemanticProperties.Description="Fritidsjobs"
                 TextColor="{DynamicResource Text}" />
 
+            <!-- Søgefelt, der opdaterer resultater live -->
             <SearchBar Placeholder="Søg her..."
                        TextChanged="OnSearchTextChanged"
                        x:Name="SearchBarControl"
                        TextColor="{DynamicResource Text}" />
 
-            <Button 
-                Text="Hent jobdetaljer" 
-                Clicked="OnFetchJobDetailsClicked" 
-                HorizontalOptions="Fill" />
-
-            <Label 
-                x:Name="JobDetailLabel"
-                Text="Ingen jobdata endnu."
-                Style="{StaticResource SubHeadline}" 
-                TextColor="{DynamicResource Text}" />
-
+            <!-- CollectionView viser filtrerede jobs -->
             <CollectionView x:Name="FilteredCollectionView" ItemsSource="{Binding FilteredItems}">
                 <CollectionView.ItemTemplate>
                     <DataTemplate>
                         <Frame BorderColor="{DynamicResource FrameBorderColor}" 
-                   BackgroundColor="{DynamicResource FrameBackgroundColor}"
-                   CornerRadius="5" 
-                   Padding="10" 
-                   Margin="5">
+                               BackgroundColor="{DynamicResource FrameBackgroundColor}"
+                               CornerRadius="5" 
+                               Padding="10" 
+                               Margin="5">
                             <Label Text="{Binding}" FontSize="18" TextColor="{DynamicResource Text}" />
                         </Frame>
                     </DataTemplate>
