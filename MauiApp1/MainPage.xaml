@@ -50,15 +50,6 @@
                     </DataTemplate>
                 </CollectionView.ItemTemplate>
             </CollectionView>
-
-
-            <!-- Toggle Theme Button -->
-            <Button 
-                Text="Skift tema" 
-                Clicked="OnToggleThemeButtonClicked" 
-                HorizontalOptions="Center" />
-
         </VerticalStackLayout>
     </ScrollView>
-
 </ContentPage>
