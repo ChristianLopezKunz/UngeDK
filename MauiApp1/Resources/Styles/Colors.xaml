@@ -44,6 +44,12 @@
     <Color x:Key="NavBarBackgroundDark">#1f1f1f</Color>
     <Color x:Key="NavBarForegroundDark">#FFFFFF</Color>
 
+    <!-- Colors for Jobs -->
+    <Color x:Key="FrameBorderColorLight">#000000</Color>
+    <Color x:Key="FrameBorderColorDark">#FFFFFF</Color>
+    <Color x:Key="FrameBackgroundColorLight">#FFFFFF</Color>
+    <Color x:Key="FrameBackgroundColorDark">#1f1f1f</Color>
+
     <!-- Dynamic Resources -->
     <SolidColorBrush x:Key="PrimaryBrush" Color="{DynamicResource Primary}" />
     <SolidColorBrush x:Key="SecondaryBrush" Color="{DynamicResource Secondary}" />

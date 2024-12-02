@@ -39,6 +39,10 @@ namespace MauiApp1
                 // Navigation Bar Resources for Dark Theme
                 Resources["NavBarBackground"] = Resources.TryGetValue("NavBarBackgroundDark", out var navBackgroundDark) ? navBackgroundDark : Colors.Black;
                 Resources["NavBarForeground"] = Resources.TryGetValue("NavBarForegroundDark", out var navForegroundDark) ? navForegroundDark : Colors.White;
+
+                // Frame Resources for Dark Theme
+                Resources["FrameBorderColor"] = Resources.TryGetValue("FrameBorderColorDark", out var frameBorderDark) ? frameBorderDark : Colors.White;
+                Resources["FrameBackgroundColor"] = Resources.TryGetValue("FrameBackgroundColorDark", out var frameBackgroundDark) ? frameBackgroundDark : Colors.Gray;
             }
             else
             {
@@ -51,6 +55,10 @@ namespace MauiApp1
                 // Navigation Bar Resources for Light Theme
                 Resources["NavBarBackground"] = Resources.TryGetValue("NavBarBackgroundLight", out var navBackgroundLight) ? navBackgroundLight : Colors.White;
                 Resources["NavBarForeground"] = Resources.TryGetValue("NavBarForegroundLight", out var navForegroundLight) ? navForegroundLight : Colors.Black;
+
+                // Frame Resources for Light Theme
+                Resources["FrameBorderColor"] = Resources.TryGetValue("FrameBorderColorLight", out var frameBorderLight) ? frameBorderLight : Colors.Black;
+                Resources["FrameBackgroundColor"] = Resources.TryGetValue("FrameBackgroundColorLight", out var frameBackgroundLight) ? frameBackgroundLight : Colors.White;
             }
         }
 

@@ -40,12 +40,17 @@
             <CollectionView x:Name="FilteredCollectionView" ItemsSource="{Binding FilteredItems}">
                 <CollectionView.ItemTemplate>
                     <DataTemplate>
-                        <Frame BorderColor="Gray" CornerRadius="5" Padding="10" Margin="5">
+                        <Frame BorderColor="{DynamicResource FrameBorderColor}" 
+                   BackgroundColor="{DynamicResource FrameBackgroundColor}"
+                   CornerRadius="5" 
+                   Padding="10" 
+                   Margin="5">
                             <Label Text="{Binding}" FontSize="18" TextColor="{DynamicResource Text}" />
                         </Frame>
                     </DataTemplate>
                 </CollectionView.ItemTemplate>
             </CollectionView>
+
 
             <!-- Toggle Theme Button -->
             <Button 
