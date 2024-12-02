@@ -24,7 +24,8 @@
 
             <SearchBar Placeholder="Søg her..."
                        TextChanged="OnSearchTextChanged"
-                       x:Name="SearchBarControl" />
+                       x:Name="SearchBarControl"
+                       TextColor="{DynamicResource Text}" />
 
             <Button 
                 Text="Hent jobdetaljer" 
