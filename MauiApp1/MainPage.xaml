@@ -2,52 +2,56 @@
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="MauiApp1.MainPage"
-             Title="Søg i liste">
+             BackgroundColor="{DynamicResource Background}">
 
     <ScrollView>
         <VerticalStackLayout
             Padding="30,0"
             Spacing="25">
-            <Image
-                Source="dotnet_bot.png"
-                HeightRequest="185"
-                Aspect="AspectFit"
-                SemanticProperties.Description="dot net bot in a hovercraft number nine" />
 
             <Label
                 Text="Unge DK"
                 Style="{StaticResource Headline}"
-                SemanticProperties.HeadingLevel="Level1" />
+                SemanticProperties.HeadingLevel="Level1"
+                TextColor="{DynamicResource Text}" />
 
             <Label
                 Text="Fritidsjobs"
                 Style="{StaticResource SubHeadline}"
                 SemanticProperties.HeadingLevel="Level3"
-                SemanticProperties.Description="Fritidsjobs" />
+                SemanticProperties.Description="Fritidsjobs"
+                TextColor="{DynamicResource Text}" />
 
             <SearchBar Placeholder="Søg her..."
                        TextChanged="OnSearchTextChanged"
                        x:Name="SearchBarControl" />
 
             <Button 
-                        Text="Hent jobdetaljer" 
-                        Clicked="OnFetchJobDetailsClicked" 
-                        HorizontalOptions="Fill" />
-            <Label 
-                        x:Name="JobDetailLabel"
-                        Text="Ingen jobdata endnu."
-                        Style="{StaticResource SubHeadline}" />
+                Text="Hent jobdetaljer" 
+                Clicked="OnFetchJobDetailsClicked" 
+                HorizontalOptions="Fill" />
 
+            <Label 
+                x:Name="JobDetailLabel"
+                Text="Ingen jobdata endnu."
+                Style="{StaticResource SubHeadline}" 
+                TextColor="{DynamicResource Text}" />
 
             <CollectionView x:Name="FilteredCollectionView" ItemsSource="{Binding FilteredItems}">
                 <CollectionView.ItemTemplate>
                     <DataTemplate>
                         <Frame BorderColor="Gray" CornerRadius="5" Padding="10" Margin="5">
-                            <Label Text="{Binding}" FontSize="18" />
+                            <Label Text="{Binding}" FontSize="18" TextColor="{DynamicResource Text}" />
                         </Frame>
                     </DataTemplate>
                 </CollectionView.ItemTemplate>
             </CollectionView>
+
+            <!-- Toggle Theme Button -->
+            <Button 
+                Text="Skift tema" 
+                Clicked="OnToggleThemeButtonClicked" 
+                HorizontalOptions="Center" />
 
         </VerticalStackLayout>
     </ScrollView>

@@ -44,5 +44,14 @@ namespace MauiApp1
                 await DisplayAlert("Error", "Kunne ikke hente jobdetaljer.", "OK");
             }
         }
+
+        // Håndter tema skift-knap
+        private void OnToggleThemeButtonClicked(object sender, EventArgs e)
+        {
+            if (Application.Current is App app)
+            {
+                app.ToggleTheme(); // Kalder App-klassens metode for at skifte tema
+            }
+        }
     }
 }
