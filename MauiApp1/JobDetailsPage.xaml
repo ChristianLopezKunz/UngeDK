@@ -1,0 +1,13 @@
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="MauiApp1.JobDetailsPage"
+             Title="Job Details">
+    <ScrollView>
+        <StackLayout Padding="10">
+            <Label Text="{Binding JobTitle}" FontSize="24" FontAttributes="Bold" />
+            <Label Text="{Binding CompanyName}" FontSize="18" />
+            <Label Text="{Binding ModifiedDate, StringFormat='Updated: {0:d}'}" FontSize="14" />
+            <Label Text="{Binding Description}" FontSize="16" />
+        </StackLayout>
+    </ScrollView>
+</ContentPage>
