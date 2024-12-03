@@ -36,7 +36,7 @@
                                BackgroundColor="{DynamicResource FrameBackgroundColor}"
                                CornerRadius="5" 
                                Padding="10" 
-                               Margin="5">
+                               Margin="8">
                             <Label Text="{Binding}" FontSize="18" TextColor="{DynamicResource Text}" />
                         </Frame>
                     </DataTemplate>
