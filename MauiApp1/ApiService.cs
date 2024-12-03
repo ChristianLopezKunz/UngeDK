@@ -16,7 +16,6 @@ namespace MauiApp1
             _httpClient = new HttpClient();
         }
 
-        // Fetch job list from API
         public async Task<JobListApiResponse> GetJobsAsync(string keyword = "", int max = 50, int page = 1, List<int> areas = null)
         {
             try
@@ -36,6 +35,7 @@ namespace MauiApp1
                 return null;
             }
         }
+
     }
 
     // API Response model

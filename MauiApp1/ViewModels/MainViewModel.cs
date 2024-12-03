@@ -3,42 +3,34 @@ using System.Linq;
 
 public class MainViewModel
 {
-    // All items from the API
+    // Fulde liste af jobs fra API'et
     public ObservableCollection<string> Items { get; set; }
 
-    // Filtered items bound to the UI
+    // Filtrerede resultater, der vises i UI
     public ObservableCollection<string> FilteredItems { get; set; }
 
     public MainViewModel()
     {
-        // Example data for initial display
-        Items = new ObservableCollection<string>
-        {
-            "Butiksassistent",
-            "Servicemedarbejder",
-            "Avisbud",
-            "Køkkenmedarbejder",
-            "Receptionist"
-        };
-
-        // Initially show all items
-        FilteredItems = new ObservableCollection<string>(Items);
+        Items = new ObservableCollection<string>();
+        FilteredItems = new ObservableCollection<string>();
     }
 
-    // Method to filter items based on search text
+    // Lokal filtrering baseret på søgetekst
     public void FilterItems(string searchText)
     {
         if (string.IsNullOrWhiteSpace(searchText))
         {
-            // Show all if no search text
+            // Vis alle jobs, hvis søgeteksten er tom
             FilteredItems.Clear();
             foreach (var item in Items)
                 FilteredItems.Add(item);
         }
         else
         {
-            // Filter items
-            var filtered = Items.Where(item => item.ToLower().Contains(searchText.ToLower())).ToList();
+            // Delvise matches (case-insensitive)
+            var filtered = Items
+                .Where(item => item.ToLower().Contains(searchText.ToLower()))
+                .ToList();
 
             FilteredItems.Clear();
             foreach (var item in filtered)
