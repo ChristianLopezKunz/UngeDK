@@ -86,12 +86,15 @@ namespace MauiApp1
             get
             {
                 if (Geography == null || Geography.Count == 0)
-                    return "Not specified";
+                    return "Ingen resultater";
 
+                // Filter and map only known IDs
                 var geographyNames = Geography
-                    .Select(id => GeographyMapping.ContainsKey(id) ? GeographyMapping[id] : $"Unknown (ID: {id})");
+                    .Where(id => GeographyMapping.ContainsKey(id)) // Keep only known IDs
+                    .Select(id => GeographyMapping[id]);
 
-                return string.Join(", ", geographyNames);
+                // Join the names with ", "
+                return geographyNames.Any() ? string.Join(", ", geographyNames) : "Ingen resultater";
             }
         }
     }
