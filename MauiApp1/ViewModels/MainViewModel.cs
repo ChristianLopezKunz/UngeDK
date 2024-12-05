@@ -34,8 +34,8 @@ namespace MauiApp1
                  item.JobTitle.IndexOf(searchText, StringComparison.OrdinalIgnoreCase) >= 0) ||
                 (!string.IsNullOrEmpty(item.CompanyName) &&
                  item.CompanyName.IndexOf(searchText, StringComparison.OrdinalIgnoreCase) >= 0) ||
-                (!string.IsNullOrEmpty(item.Resume) &&
-                 item.Resume.IndexOf(searchText, StringComparison.OrdinalIgnoreCase) >= 0))
+                (!string.IsNullOrEmpty(item.GeographyDisplay) &&
+                 item.GeographyDisplay.IndexOf(searchText, StringComparison.OrdinalIgnoreCase) >= 0))
             .ToList();
 
             foreach (var item in filtered)
