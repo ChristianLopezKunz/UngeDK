@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
 using Microsoft.Maui.Controls;
@@ -18,7 +19,7 @@ namespace MauiApp1
             _viewModel = new MainViewModel();
             BindingContext = _viewModel;
 
-            // Indledningsvis hent jobs
+            // Fetch jobs initially
             Task.Run(() => LoadJobsFromApi());
         }
 
@@ -30,15 +31,15 @@ namespace MauiApp1
                 _viewModel.Items.Clear();
                 foreach (var job in jobList.Jobs)
                 {
-                    _viewModel.Items.Add($"{job.JobTitle} at {job.CompanyName}");
+                    _viewModel.Items.Add(job); // Add the full Job object
                 }
-                _viewModel.FilterItems(""); // Initial visning af alle jobs
+                _viewModel.FilterItems(""); // Show all jobs initially
             }
         }
 
         private async void OnSearchTextChanged(object sender, TextChangedEventArgs e)
         {
-            _debounceCts?.Cancel(); // Annuller tidligere debounce-task
+            _debounceCts?.Cancel(); // Cancel previous debounce task
             _debounceCts = new CancellationTokenSource();
 
             try
@@ -48,38 +49,58 @@ namespace MauiApp1
 
                 if (string.IsNullOrEmpty(searchText))
                 {
-                    // Hvis ingen søgetekst, vis alle jobs
-                    _viewModel.FilterItems("");
+                    _viewModel.FilterItems(""); // Show all jobs
+                    return;
                 }
-                else
-                {
-                    // Hvis søgetekst, filtrer lokalt
-                    _viewModel.FilterItems(searchText);
 
-                    // Hvis ingen lokale matches, lav nyt API-kald
-                    if (!_viewModel.FilteredItems.Any())
+                // Perform local filtering first
+                _viewModel.FilterItems(searchText);
+
+                // If no local matches, fetch more from the API
+                if (!_viewModel.FilteredItems.Any())
+                {
+                    var jobList = await _apiService.GetJobsAsync(searchText, max: 50, page: 1);
+                    if (jobList != null && jobList.Status == "ok")
                     {
-                        var jobList = await _apiService.GetJobsAsync(searchText, max: 50, page: 1);
-                        if (jobList != null && jobList.Status == "ok")
+                        foreach (var job in jobList.Jobs)
                         {
-                            foreach (var job in jobList.Jobs)
+                            if (!_viewModel.Items.Any(existing => existing.Id == job.Id)) // Check duplicates by Job ID
                             {
-                                _viewModel.Items.Add($"{job.JobTitle} at {job.CompanyName}");
+                                _viewModel.Items.Add(job);
                             }
-                            _viewModel.FilterItems(searchText);
                         }
-                        else
+
+                        // Reapply filtering with the updated items
+                        _viewModel.FilterItems(searchText);
+                    }
+                    else
+                    {
+                        // If API returns no results
+                        _viewModel.FilteredItems.Clear();
+                        _viewModel.FilteredItems.Add(new Job
                         {
-                            _viewModel.FilteredItems.Clear();
-                            _viewModel.FilteredItems.Add("Ingen resultater fundet.");
-                        }
+                            JobTitle = "Ingen resultater fundet.",
+                            CompanyName = string.Empty
+                        });
                     }
                 }
             }
             catch (TaskCanceledException)
             {
-                // Ignorer annullerede tasks fra debounce
+                // Ignore canceled tasks from debounce
             }
+        }
+
+
+        private async void OnJobSelected(object sender, SelectionChangedEventArgs e)
+        {
+            if (e.CurrentSelection.FirstOrDefault() is Job selectedJob)
+            {
+                await Navigation.PushAsync(new JobDetailsPage(selectedJob));
+            }
+
+            // Deselect the item
+            ((CollectionView)sender).SelectedItem = null;
         }
     }
 }

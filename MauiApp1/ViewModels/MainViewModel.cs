@@ -1,40 +1,47 @@
 ﻿using System.Collections.ObjectModel;
 using System.Linq;
 
-public class MainViewModel
+namespace MauiApp1
 {
-    // Fulde liste af jobs fra API'et
-    public ObservableCollection<string> Items { get; set; }
-
-    // Filtrerede resultater, der vises i UI
-    public ObservableCollection<string> FilteredItems { get; set; }
-
-    public MainViewModel()
+    public class MainViewModel
     {
-        Items = new ObservableCollection<string>();
-        FilteredItems = new ObservableCollection<string>();
-    }
+        public ObservableCollection<Job> Items { get; set; }
+        public ObservableCollection<Job> FilteredItems { get; set; }
 
-    // Lokal filtrering baseret på søgetekst
-    public void FilterItems(string searchText)
-    {
-        if (string.IsNullOrWhiteSpace(searchText))
+        public MainViewModel()
         {
-            // Vis alle jobs, hvis søgeteksten er tom
-            FilteredItems.Clear();
-            foreach (var item in Items)
-                FilteredItems.Add(item);
+            Items = new ObservableCollection<Job>();
+            FilteredItems = new ObservableCollection<Job>();
         }
-        else
-        {
-            // Delvise matches (case-insensitive)
-            var filtered = Items
-                .Where(item => item.ToLower().Contains(searchText.ToLower()))
-                .ToList();
 
+        public void FilterItems(string searchText)
+        {
             FilteredItems.Clear();
+
+            if (string.IsNullOrWhiteSpace(searchText))
+            {
+                // Show all items when search is empty
+                foreach (var item in Items)
+                {
+                    FilteredItems.Add(item);
+                }
+                return;
+            }
+
+            // Filter items with case-insensitive search
+            var filtered = Items.Where(item =>
+                (!string.IsNullOrEmpty(item.JobTitle) &&
+                 item.JobTitle.IndexOf(searchText, StringComparison.OrdinalIgnoreCase) >= 0) ||
+                (!string.IsNullOrEmpty(item.CompanyName) &&
+                 item.CompanyName.IndexOf(searchText, StringComparison.OrdinalIgnoreCase) >= 0) ||
+                (!string.IsNullOrEmpty(item.Resume) &&
+                 item.Resume.IndexOf(searchText, StringComparison.OrdinalIgnoreCase) >= 0))
+            .ToList();
+
             foreach (var item in filtered)
+            {
                 FilteredItems.Add(item);
+            }
         }
     }
 }
