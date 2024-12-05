@@ -1,39 +1,47 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-             x:Class="MauiApp1.MainPage">
+             x:Class="MauiApp1.MainPage"
+             BackgroundColor="{DynamicResource Background}">
 
     <ScrollView>
         <VerticalStackLayout
             Padding="30,0"
             Spacing="25">
-            <Image
-                Source="dotnet_bot.png"
-                HeightRequest="185"
-                Aspect="AspectFit"
-                SemanticProperties.Description="dot net bot in a hovercraft number nine" />
 
             <Label
                 Text="Unge DK"
                 Style="{StaticResource Headline}"
-                SemanticProperties.HeadingLevel="Level1" />
+                SemanticProperties.HeadingLevel="Level1"
+                TextColor="{DynamicResource Text}" />
 
             <Label
                 Text="Fritidsjobs"
                 Style="{StaticResource SubHeadline}"
                 SemanticProperties.HeadingLevel="Level3"
-                SemanticProperties.Description="Fritidsjobs" />
+                SemanticProperties.Description="Fritidsjobs"
+                TextColor="{DynamicResource Text}" />
 
-            <Button
-                x:Name="CounterBtn"
-                Text="Dont click" 
-                SemanticProperties.Hint="Counts the number of times you click"
-                Clicked="OnCounterClicked"
-                HorizontalOptions="Fill" />
+            <!-- Søgefelt, der opdaterer resultater live -->
+            <SearchBar Placeholder="Søg her..."
+                       TextChanged="OnSearchTextChanged"
+                       x:Name="SearchBarControl"
+                       TextColor="{DynamicResource Text}" />
 
-            <Button Text="Click Me" Command="{Binding MyCommand}" />
-
+            <!-- CollectionView viser filtrerede jobs -->
+            <CollectionView x:Name="FilteredCollectionView" ItemsSource="{Binding FilteredItems}">
+                <CollectionView.ItemTemplate>
+                    <DataTemplate>
+                        <Frame BorderColor="{DynamicResource FrameBorderColor}" 
+                               BackgroundColor="{DynamicResource FrameBackgroundColor}"
+                               CornerRadius="5" 
+                               Padding="10" 
+                               Margin="8">
+                            <Label Text="{Binding}" FontSize="18" TextColor="{DynamicResource Text}" />
+                        </Frame>
+                    </DataTemplate>
+                </CollectionView.ItemTemplate>
+            </CollectionView>
         </VerticalStackLayout>
     </ScrollView>
-
 </ContentPage>

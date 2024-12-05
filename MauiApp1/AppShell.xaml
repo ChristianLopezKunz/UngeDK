@@ -5,10 +5,24 @@
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
     xmlns:local="clr-namespace:MauiApp1"
     Shell.FlyoutBehavior="Flyout"
-    Title="MauiApp1">
+    Title="Unge DK"
+    Shell.BackgroundColor="{DynamicResource NavBarBackground}"
+    Shell.ForegroundColor="{DynamicResource NavBarForeground}"
+    Shell.TabBarBackgroundColor="{DynamicResource NavBarBackground}"
+    Shell.TabBarForegroundColor="{DynamicResource NavBarForeground}">
 
+    <!-- Main Page -->
     <ShellContent
         ContentTemplate="{DataTemplate local:MainPage}"
         Route="MainPage" />
 
+    <!-- Add ToolbarItem for theme toggle -->
+    <Shell.ToolbarItems>
+        <ToolbarItem 
+            IconImageSource="sun_moon.png"
+            Priority="0" 
+            Order="Primary" 
+            Clicked="OnToggleThemeButtonClicked" />
+    </Shell.ToolbarItems>
 </Shell>
+    
