@@ -40,7 +40,7 @@
                    FontSize="20" 
                    Margin="0,50,0,0" 
                    TextColor="{DynamicResource Text}" />
-            <Label Text="{Binding Geography}" 
+            <Label Text="{Binding GeographyDisplay}" 
                    FontSize="18" 
                    TextColor="{DynamicResource Text}" />
         </VerticalStackLayout>

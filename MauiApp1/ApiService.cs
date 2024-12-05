@@ -60,5 +60,39 @@ namespace MauiApp1
         public string Resume { get; set; }
         public int JobLevel { get; set; }
         public List<int> Geography { get; set; }
+
+        // Static mapping of geography IDs to names
+        private static readonly Dictionary<int, string> GeographyMapping = new Dictionary<int, string>
+    {
+        { 2, "Storkøbenhavn" },
+        { 3, "Nordsjælland" },
+        { 14, "Østsjælland" },
+        { 4, "Vestsjælland" },
+        { 5, "Sydsjælland & Øer" },
+        { 13, "Fyn" },
+        { 12, "Sønderjylland" },
+        { 11, "Sydvestjylland (Esbjerg)" },
+        { 9, "Vestjylland" },
+        { 10, "Sydøstjylland" },
+        { 7, "Midtjylland" },
+        { 6, "Østjylland (Aarhus)" },
+        { 8, "Nordjylland" },
+        { 20, "Bornholm" }
+    };
+
+        // Computed property for formatted Geography
+        public string GeographyDisplay
+        {
+            get
+            {
+                if (Geography == null || Geography.Count == 0)
+                    return "Not specified";
+
+                var geographyNames = Geography
+                    .Select(id => GeographyMapping.ContainsKey(id) ? GeographyMapping[id] : $"Unknown (ID: {id})");
+
+                return string.Join(", ", geographyNames);
+            }
+        }
     }
 }
