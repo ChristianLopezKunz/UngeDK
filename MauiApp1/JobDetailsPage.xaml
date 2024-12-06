@@ -35,7 +35,7 @@
                    FontSize="18" 
                    TextColor="{DynamicResource Text}" />
 			
-			<Label Text="Sted:" 
+			<Label Text="Lokation:" 
                    FontAttributes="Bold" 
                    FontSize="20" 
                    Margin="0,50,0,0" 
