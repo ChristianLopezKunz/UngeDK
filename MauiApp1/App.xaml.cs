@@ -36,6 +36,10 @@ namespace MauiApp1
                 Resources["Background"] = Resources.TryGetValue("BackgroundDark", out var backgroundDark) ? backgroundDark : Colors.Black;
                 Resources["Text"] = Resources.TryGetValue("TextDark", out var textDark) ? textDark : Colors.White;
 
+                // Navigation Bar Resources for Dark Theme
+                Resources["NavBarBackground"] = Resources.TryGetValue("NavBarBackgroundDark", out var navBackgroundDark) ? navBackgroundDark : Colors.Black;
+                Resources["NavBarForeground"] = Resources.TryGetValue("NavBarForegroundDark", out var navForegroundDark) ? navForegroundDark : Colors.White;
+
                 // Frame Resources for Dark Theme
                 Resources["FrameBorderColor"] = Resources.TryGetValue("FrameBorderColorDark", out var frameBorderDark) ? frameBorderDark : Colors.White;
                 Resources["FrameBackgroundColor"] = Resources.TryGetValue("FrameBackgroundColorDark", out var frameBackgroundDark) ? frameBackgroundDark : Colors.Gray;
@@ -47,6 +51,10 @@ namespace MauiApp1
                 Resources["Secondary"] = Resources.TryGetValue("SecondaryLight", out var secondaryLight) ? secondaryLight : Colors.LightGray;
                 Resources["Background"] = Resources.TryGetValue("BackgroundLight", out var backgroundLight) ? backgroundLight : Colors.White;
                 Resources["Text"] = Resources.TryGetValue("TextLight", out var textLight) ? textLight : Colors.Black;
+
+                // Navigation Bar Resources for Light Theme
+                Resources["NavBarBackground"] = Resources.TryGetValue("NavBarBackgroundLight", out var navBackgroundLight) ? navBackgroundLight : Colors.White;
+                Resources["NavBarForeground"] = Resources.TryGetValue("NavBarForegroundLight", out var navForegroundLight) ? navForegroundLight : Colors.Black;
 
                 // Frame Resources for Light Theme
                 Resources["FrameBorderColor"] = Resources.TryGetValue("FrameBorderColorLight", out var frameBorderLight) ? frameBorderLight : Colors.Black;
