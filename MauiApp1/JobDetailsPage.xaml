@@ -22,17 +22,8 @@
                FontSize="20" 
                Margin="0,50,0,0" 
                TextColor="{DynamicResource Text}" />
-            <Label Text="{Binding ApplicationDate}" 
+            <Label Text="{Binding ApplicationDeadlineDisplay}" 
                FontSize="18"
-               TextColor="{DynamicResource Text}" />
-
-            <Label Text="Om stillingen:" 
-               FontAttributes="Bold" 
-               FontSize="20" 
-               Margin="0,50,0,0" 
-               TextColor="{DynamicResource Text}" />
-            <Label Text="{Binding Resume}" 
-               FontSize="18" 
                TextColor="{DynamicResource Text}" />
 
             <Label Text="Lokation:" 
@@ -43,6 +34,15 @@
             <Label Text="{Binding GeographyDisplay}" 
                    FontSize="18" 
                    TextColor="{DynamicResource Text}" />
+
+            <Label Text="Om stillingen:" 
+               FontAttributes="Bold" 
+               FontSize="20" 
+               Margin="0,50,0,0" 
+               TextColor="{DynamicResource Text}" />
+            <Label Text="{Binding Resume}" 
+               FontSize="18" 
+               TextColor="{DynamicResource Text}" />
 
             <Button Text="Gå til ansøgning"
                 BackgroundColor="#ffbc2c"

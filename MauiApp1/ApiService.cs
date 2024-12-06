@@ -117,7 +117,6 @@ namespace MauiApp1
         { 20, "Bornholm" }
     };
 
-        // Computed property for formatted Geography
         public string GeographyDisplay
         {
             get
@@ -125,16 +124,22 @@ namespace MauiApp1
                 if (Geography == null || Geography.Count == 0)
                     return "Ingen resultater";
 
-                // Filter and map only known IDs
                 var geographyNames = Geography
-                    .Where(id => GeographyMapping.ContainsKey(id)) // Keep only known IDs
+                    .Where(id => GeographyMapping.ContainsKey(id))
                     .Select(id => GeographyMapping[id]);
 
-                // Join the names with ", "
                 return geographyNames.Any() ? string.Join(", ", geographyNames) : "Ingen resultater";
             }
         }
 
-    }
+        public string ApplicationDeadlineDisplay
+        {
+            get
+            {
+                // If ApplicationDate is null or empty, return "snarest muligt"
+                return string.IsNullOrWhiteSpace(ApplicationDate) ? "snarest muligt" : ApplicationDate;
+            }
+        }
 
+    }
 }
