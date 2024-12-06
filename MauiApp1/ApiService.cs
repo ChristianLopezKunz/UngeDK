@@ -94,6 +94,8 @@ namespace MauiApp1
         public int JobLevel { get; set; }
         public List<int> Geography { get; set; }
         public string ApplicationUrl { get; set; }
+        public string CompanyAndGeography => $"{CompanyName}, {GeographyDisplay}";
+
 
 
         // Static mapping of geography IDs to names
