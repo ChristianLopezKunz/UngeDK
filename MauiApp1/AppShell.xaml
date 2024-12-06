@@ -6,10 +6,8 @@
     xmlns:local="clr-namespace:MauiApp1"
     Shell.FlyoutBehavior="Flyout"
     Title="Unge DK"
-    Shell.BackgroundColor="{DynamicResource NavBarBackground}"
-    Shell.ForegroundColor="{DynamicResource NavBarForeground}"
-    Shell.TabBarBackgroundColor="{DynamicResource NavBarBackground}"
-    Shell.TabBarForegroundColor="{DynamicResource NavBarForeground}">
+    Shell.BackgroundColor="{DynamicResource Background}"
+    Shell.TabBarBackgroundColor="{DynamicResource Background}">
 
     <!-- Main Page -->
     <ShellContent

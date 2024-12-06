@@ -36,11 +36,11 @@
                 <CollectionView.ItemTemplate>
                     <DataTemplate>
                         <Frame BorderColor="{DynamicResource FrameBorderColor}" 
-                   BackgroundColor="{DynamicResource FrameBackgroundColor}"
-                   CornerRadius="5"
-                   Padding="10"
-                   Margin="8"
-                   HasShadow="False">
+                               BackgroundColor="{DynamicResource FrameBackgroundColor}"
+                               CornerRadius="5"
+                               Padding="10"
+                               Margin="8"
+                               HasShadow="False">
                             <StackLayout InputTransparent="True">
                                 <Label Text="{Binding CompanyName}" FontSize="15" TextColor="{DynamicResource Text}" />
                                 <Label Text="{Binding JobTitle}" FontSize="18" TextColor="{DynamicResource Text}" />
