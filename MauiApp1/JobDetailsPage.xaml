@@ -5,44 +5,41 @@
     <ScrollView>
         <VerticalStackLayout Padding="10">
             <Label Text="{Binding JobTitle}" 
-                   FontSize="35" 
-                   TextColor="{DynamicResource Text}" />
+               FontSize="35" 
+               TextColor="{DynamicResource Text}" />
 
             <Label Text="Firma:" 
-                   FontAttributes="Bold" 
-                   FontSize="20" 
-                   Margin="0,50,0,0" 
-                   TextColor="{DynamicResource Text}" />
+               FontAttributes="Bold" 
+               FontSize="20" 
+               Margin="0,50,0,0" 
+               TextColor="{DynamicResource Text}" />
             <Label Text="{Binding CompanyName}" 
-                   FontSize="18"
-                   TextColor="{DynamicResource Text}" />
+               FontSize="18"
+               TextColor="{DynamicResource Text}" />
 
             <Label Text="Ansøgningfrist:" 
-                   FontAttributes="Bold" 
-                   FontSize="20" 
-                   Margin="0,50,0,0" 
-                   TextColor="{DynamicResource Text}" />
+               FontAttributes="Bold" 
+               FontSize="20" 
+               Margin="0,50,0,0" 
+               TextColor="{DynamicResource Text}" />
             <Label Text="{Binding ApplicationDate}" 
-                   FontSize="18"
-                   TextColor="{DynamicResource Text}" />
+               FontSize="18"
+               TextColor="{DynamicResource Text}" />
 
             <Label Text="Om stillingen:" 
-                   FontAttributes="Bold" 
-                   FontSize="20" 
-                   Margin="0,50,0,0" 
-                   TextColor="{DynamicResource Text}" />
+               FontAttributes="Bold" 
+               FontSize="20" 
+               Margin="0,50,0,0" 
+               TextColor="{DynamicResource Text}" />
             <Label Text="{Binding Resume}" 
-                   FontSize="18" 
-                   TextColor="{DynamicResource Text}" />
-			
-			<Label Text="Lokation:" 
-                   FontAttributes="Bold" 
-                   FontSize="20" 
-                   Margin="0,50,0,0" 
-                   TextColor="{DynamicResource Text}" />
-            <Label Text="{Binding GeographyDisplay}" 
-                   FontSize="18" 
-                   TextColor="{DynamicResource Text}" />
+               FontSize="18" 
+               TextColor="{DynamicResource Text}" />
+            <Button Text="Gå til ansøgning"
+                BackgroundColor="#ffbc2c"
+                TextColor="White"
+                FontAttributes="Bold"
+                Margin="0,20,0,0"
+                Clicked="OnOpenApplicationUrlClicked"/>
         </VerticalStackLayout>
     </ScrollView>
 </ContentPage>
