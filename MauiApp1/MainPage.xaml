@@ -42,8 +42,9 @@
                    Margin="8"
                    HasShadow="False">
                             <StackLayout InputTransparent="True">
-                                <Label Text="{Binding JobTitle}" FontSize="18" Margin="8" FontAttributes="Bold" TextColor="{DynamicResource Text}" />
-                                <Label Text="{Binding CompanyAndGeography}" FontSize="17" Margin="8" TextColor="{DynamicResource Text}" />
+                                <Label Text="{Binding CompanyName}" FontSize="15" TextColor="{DynamicResource Text}" />
+                                <Label Text="{Binding JobTitle}" FontSize="18" TextColor="{DynamicResource Text}" />
+                                <Label Text="{Binding GeographyDisplay}" FontSize="12" TextColor="{DynamicResource Text}" />
                             </StackLayout>
                         </Frame>
                     </DataTemplate>

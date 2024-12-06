@@ -60,8 +60,6 @@ namespace MauiApp1
         public string Resume { get; set; }
         public int JobLevel { get; set; }
         public List<int> Geography { get; set; }
-        public string CompanyAndGeography => $"{CompanyName}, {GeographyDisplay}";
-
 
         // Static mapping of geography IDs to names
         private static readonly Dictionary<int, string> GeographyMapping = new Dictionary<int, string>
