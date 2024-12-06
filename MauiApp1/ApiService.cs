@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Net.Http;
 using System.Threading.Tasks;
+using System.Windows.Input;
 using Newtonsoft.Json;
 
 namespace MauiApp1
@@ -35,10 +36,33 @@ namespace MauiApp1
                 return null;
             }
         }
+        public async Task<JobDetailsResponse> GetJobDetailsAsync(string jobId)
+        {
+            try
+            {
+                string url = $"https://studerendeonline.dk/api/ungdk/job/{jobId}?apikey={ApiKey}";
+                HttpResponseMessage response = await _httpClient.GetAsync(url);
+                response.EnsureSuccessStatusCode();
+
+                string jsonResponse = await response.Content.ReadAsStringAsync();
+                return JsonConvert.DeserializeObject<JobDetailsResponse>(jsonResponse);
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine($"Error: {ex.Message}");
+                return null;
+            }
+        }
 
     }
-
-    // API Response model
+    // Job details response model
+    public class JobDetailsResponse
+    {
+        public string Status { get; set; }
+        public string Message { get; set; }
+        public Job Data { get; set; } // Assuming `Job` contains all the properties for job details.
+    }
+    // Job list API Response model
     public class JobListApiResponse
     {
         public string Status { get; set; }
@@ -46,8 +70,17 @@ namespace MauiApp1
         public int Total { get; set; }
         public List<Job> Jobs { get; set; }
     }
+    public class JobDetails
+    {
+        public string CompanyName { get; set; }
+        public string ApplicationDeadline { get; set; }
+        public string Description { get; set; }
+        public string Location { get; set; }
+        public string Content { get; set; }
+        public string ApplicationUrl { get; set; }
+    }
 
-    // Job model
+    // Job list model
     public class Job
     {
         public string Id { get; set; }
@@ -60,6 +93,8 @@ namespace MauiApp1
         public string Resume { get; set; }
         public int JobLevel { get; set; }
         public List<int> Geography { get; set; }
+        public string ApplicationUrl { get; set; }
+
 
         // Static mapping of geography IDs to names
         private static readonly Dictionary<int, string> GeographyMapping = new Dictionary<int, string>
@@ -97,5 +132,7 @@ namespace MauiApp1
                 return geographyNames.Any() ? string.Join(", ", geographyNames) : "Ingen resultater";
             }
         }
+
     }
+
 }
