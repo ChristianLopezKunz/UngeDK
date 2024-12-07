@@ -6,37 +6,89 @@
 
     <ScrollView>
         <VerticalStackLayout Padding="10">
+
             <Label Text="{Binding JobTitle}" 
-               FontSize="35" 
+               FontSize="35"
+               Margin="0,20,0,50"
                TextColor="{DynamicResource Text}" />
+            
+            <Grid RowDefinitions="Auto, Auto, Auto" ColumnDefinitions="*">
+                <Frame Grid.Row="0"
+               BorderColor="{DynamicResource FrameBorderColor}" 
+               BackgroundColor="{DynamicResource FrameBackgroundColor}"
+               CornerRadius="5"
+               Padding="5"
+               Margin="5"
+               HasShadow="False"
+               HorizontalOptions="Fill"
+               VerticalOptions="Center">
+                    <StackLayout InputTransparent="True"
+                HorizontalOptions="Center"
+                VerticalOptions="Center"
+                Spacing="5">
+                        <Label Text="Firma:" 
+                FontAttributes="Bold" 
+                FontSize="20"
+                TextColor="{DynamicResource Text}" 
+                HorizontalOptions="Center" />
+                        <Label Text="{Binding CompanyName}" 
+                FontSize="18"
+                TextColor="{DynamicResource Text}" 
+                HorizontalOptions="Center" />
+                    </StackLayout>
+                </Frame>
 
-            <Label Text="Firma:" 
-               FontAttributes="Bold" 
-               FontSize="20" 
-               Margin="0,50,0,0" 
-               TextColor="{DynamicResource Text}" />
-            <Label Text="{Binding CompanyName}" 
-               FontSize="18"
-               TextColor="{DynamicResource Text}" />
+                <Frame Grid.Row="1"
+               BorderColor="{DynamicResource FrameBorderColor}" 
+               BackgroundColor="{DynamicResource FrameBackgroundColor}"
+               CornerRadius="5"
+               Padding="5"
+               Margin="5"
+               HasShadow="False"
+               HorizontalOptions="Fill"
+               VerticalOptions="Center">
+                    <StackLayout InputTransparent="True"
+                HorizontalOptions="Center"
+                VerticalOptions="Center"
+                Spacing="5">
+                        <Label Text="Frist:" 
+                FontAttributes="Bold" 
+                FontSize="20"
+                TextColor="{DynamicResource Text}" 
+                HorizontalOptions="Center" />
+                        <Label Text="{Binding ApplicationDeadlineDisplay}" 
+                FontSize="18"
+                TextColor="{DynamicResource Text}" 
+                HorizontalOptions="Center" />
+                    </StackLayout>
+                </Frame>
 
-            <Label Text="Ansøgningfrist:" 
-               FontAttributes="Bold" 
-               FontSize="20" 
-               Margin="0,50,0,0" 
-               TextColor="{DynamicResource Text}" />
-            <Label Text="{Binding ApplicationDeadlineDisplay}" 
-               FontSize="18"
-               TextColor="{DynamicResource Text}" />
-
-            <Label Text="Lokation:" 
-               FontAttributes="Bold" 
-               FontSize="20" 
-               Margin="0,50,0,0" 
-               TextColor="{DynamicResource Text}" />
-            <Label Text="{Binding GeographyDisplay}" 
-               FontSize="18" 
-               TextColor="{DynamicResource Text}" />
-
+                <Frame Grid.Row="1"
+               BorderColor="{DynamicResource FrameBorderColor}" 
+               BackgroundColor="{DynamicResource FrameBackgroundColor}"
+               CornerRadius="5"
+               Padding="5"
+               Margin="5"
+               HasShadow="False"
+               HorizontalOptions="Fill"
+               VerticalOptions="Center">
+                    <StackLayout InputTransparent="True"
+                HorizontalOptions="Center"
+                VerticalOptions="Center"
+                Spacing="5">
+                        <Label Text="Lokation:" 
+                FontAttributes="Bold" 
+                FontSize="20"
+                TextColor="{DynamicResource Text}" 
+                HorizontalOptions="Center" />
+                        <Label Text="{Binding GeographyDisplay}" 
+                FontSize="18"
+                TextColor="{DynamicResource Text}" 
+                HorizontalOptions="Center" />
+                    </StackLayout>
+                </Frame>
+            </Grid>
+            
             <Label Text="Om stillingen:" 
                FontAttributes="Bold" 
                FontSize="20" 
@@ -46,12 +98,14 @@
                FontSize="18" 
                TextColor="{DynamicResource Text}" />
 
-            <Button Text="Gå til ansøgning"
+            <Button Text="Ansøg"
+                ImageSource="pencil.png"
                 BackgroundColor="#ffbc2c"
                 TextColor="White"
+                FontSize="15"
                 FontAttributes="Bold"
                 Margin="0,20,0,0"
-                Clicked="OnOpenApplicationUrlClicked"/>
+                Clicked="OnOpenApplicationUrlClicked" />
         </VerticalStackLayout>
     </ScrollView>
 </ContentPage>
