@@ -15,12 +15,7 @@
                 SemanticProperties.HeadingLevel="Level1"
                 TextColor="{DynamicResource Text}" />
 
-            <Label
-                Text="Fritidsjobs"
-                Style="{StaticResource SubHeadline}"
-                SemanticProperties.HeadingLevel="Level3"
-                SemanticProperties.Description="Fritidsjobs"
-                TextColor="{DynamicResource Text}" />
+            <Label/>
 
             <SearchBar
                 Placeholder="Søg efter jobtitel, virksomhed, nøgleord..."
