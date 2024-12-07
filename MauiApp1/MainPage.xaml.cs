@@ -37,6 +37,13 @@ namespace MauiApp1
             }
         }
 
+        private void OnRegionFilterChanged(object sender, EventArgs e)
+        {
+            var selectedRegion = RegionPicker.SelectedItem?.ToString() ?? "Alle";
+            var searchText = SearchBarControl.Text;
+            _viewModel.FilterItems(searchText, selectedRegion);
+        }
+
         private async void OnSearchTextChanged(object sender, TextChangedEventArgs e)
         {
             _debounceCts?.Cancel(); // Cancel previous debounce task
@@ -46,6 +53,8 @@ namespace MauiApp1
             {
                 await Task.Delay(300, _debounceCts.Token); // 300ms debounce
                 string searchText = e.NewTextValue?.Trim();
+                var selectedRegion = RegionPicker.SelectedItem?.ToString() ?? "Alle";
+                _viewModel.FilterItems(searchText, selectedRegion);
 
                 if (string.IsNullOrEmpty(searchText))
                 {

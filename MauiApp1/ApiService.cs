@@ -60,7 +60,7 @@ namespace MauiApp1
     {
         public string Status { get; set; }
         public string Message { get; set; }
-        public Job Data { get; set; } // Assuming `Job` contains all the properties for job details.
+        public Job Data { get; set; }
     }
     // Job list API Response model
     public class JobListApiResponse

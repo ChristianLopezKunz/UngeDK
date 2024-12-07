@@ -22,10 +22,17 @@
                 SemanticProperties.Description="Fritidsjobs"
                 TextColor="{DynamicResource Text}" />
 
-            <SearchBar Placeholder="Søg Job, Firma og Lokation..."
-                       TextChanged="OnSearchTextChanged"
-                       x:Name="SearchBarControl"
-                       TextColor="{DynamicResource Text}" />
+            <SearchBar
+                Placeholder="Søg efter jobtitel, virksomhed, nøgleord..."
+                TextChanged="OnSearchTextChanged"
+                x:Name="SearchBarControl"
+                TextColor="{DynamicResource Text}" />
+
+            <Picker x:Name="RegionPicker"
+                Title="Områder:"
+                ItemsSource="{Binding RegionOptions}"
+                SelectedIndexChanged="OnRegionFilterChanged"
+                HorizontalOptions="Fill" />
 
             <CollectionView x:Name="FilteredCollectionView"
                 ItemsSource="{Binding FilteredItems}"
