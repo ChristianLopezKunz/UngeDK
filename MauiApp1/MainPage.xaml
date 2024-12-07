@@ -22,13 +22,11 @@
                 SemanticProperties.Description="Fritidsjobs"
                 TextColor="{DynamicResource Text}" />
 
-            <!-- Søgefelt, der opdaterer resultater live -->
             <SearchBar Placeholder="Søg her..."
                        TextChanged="OnSearchTextChanged"
                        x:Name="SearchBarControl"
                        TextColor="{DynamicResource Text}" />
 
-            <!-- CollectionView viser filtrerede jobs -->
             <CollectionView x:Name="FilteredCollectionView"
                 ItemsSource="{Binding FilteredItems}"
                 SelectionMode="Single"

@@ -121,7 +121,7 @@ namespace MauiApp1
         {
             get
             {
-                if (Geography == null || Geography.Count == 0)
+                if (Geography == null || !Geography.Any())
                     return "Ingen resultater";
 
                 var geographyNames = Geography
@@ -136,7 +136,6 @@ namespace MauiApp1
         {
             get
             {
-                // If ApplicationDate is null or empty, return "snarest muligt"
                 return string.IsNullOrWhiteSpace(ApplicationDate) ? "snarest muligt" : ApplicationDate;
             }
         }

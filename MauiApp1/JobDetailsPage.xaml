@@ -1,7 +1,9 @@
-﻿<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="MauiApp1.JobDetailsPage"
              BackgroundColor="{DynamicResource Background}">
+
     <ScrollView>
         <VerticalStackLayout Padding="10">
             <Label Text="{Binding JobTitle}" 
@@ -27,13 +29,13 @@
                TextColor="{DynamicResource Text}" />
 
             <Label Text="Lokation:" 
-                   FontAttributes="Bold" 
-                   FontSize="20" 
-                   Margin="0,50,0,0" 
-                   TextColor="{DynamicResource Text}" />
+               FontAttributes="Bold" 
+               FontSize="20" 
+               Margin="0,50,0,0" 
+               TextColor="{DynamicResource Text}" />
             <Label Text="{Binding GeographyDisplay}" 
-                   FontSize="18" 
-                   TextColor="{DynamicResource Text}" />
+               FontSize="18" 
+               TextColor="{DynamicResource Text}" />
 
             <Label Text="Om stillingen:" 
                FontAttributes="Bold" 

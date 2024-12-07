@@ -22,7 +22,15 @@ namespace MauiApp1
 
                 if (jobDetailsResponse != null && jobDetailsResponse.Status == "ok")
                 {
-                    BindingContext = jobDetailsResponse.Data; // Update BindingContext with detailed data
+                    var detailedJob = jobDetailsResponse.Data;
+
+                    // Preserve Geography if it is null in the detailed job
+                    if (BindingContext is Job existingJob && detailedJob.Geography == null)
+                    {
+                        detailedJob.Geography = existingJob.Geography;
+                    }
+
+                    BindingContext = detailedJob; // Update with detailed job data
                 }
                 else
                 {
