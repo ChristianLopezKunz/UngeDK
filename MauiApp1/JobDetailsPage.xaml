@@ -63,7 +63,7 @@
                     </StackLayout>
                 </Frame>
 
-                <Frame Grid.Row="1"
+                <Frame Grid.Row="2"
                BorderColor="{DynamicResource FrameBorderColor}" 
                BackgroundColor="{DynamicResource FrameBackgroundColor}"
                CornerRadius="5"

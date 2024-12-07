@@ -22,7 +22,7 @@
                 SemanticProperties.Description="Fritidsjobs"
                 TextColor="{DynamicResource Text}" />
 
-            <SearchBar Placeholder="Søg her..."
+            <SearchBar Placeholder="Søg Job, Firma og Lokation..."
                        TextChanged="OnSearchTextChanged"
                        x:Name="SearchBarControl"
                        TextColor="{DynamicResource Text}" />
