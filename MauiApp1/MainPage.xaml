@@ -17,17 +17,38 @@
 
             <Label/>
 
-            <SearchBar
-                Placeholder="Søg efter jobtitel, virksomhed, nøgleord..."
-                TextChanged="OnSearchTextChanged"
-                x:Name="SearchBarControl"
-                TextColor="{DynamicResource Text}" />
+            <Frame BorderColor="{DynamicResource FrameBorderColor}" 
+                BackgroundColor="{DynamicResource FrameBackgroundColor}" 
+                CornerRadius="5" 
+                Padding="0" 
+                Margin="5" 
+                HasShadow="False">
+                <SearchBar Placeholder="Søg efter jobtitel, virksomhed, nøgleord..."
+               TextChanged="OnSearchTextChanged"
+               x:Name="SearchBarControl"
+               TextColor="{DynamicResource Text}" />
+            </Frame>
 
-            <Picker x:Name="RegionPicker"
-                Title="Områder:"
+            <VerticalStackLayout Spacing="5">
+                <Label Text="Områder:" 
+                FontSize="16" 
+                FontAttributes="Bold" 
+                TextColor="{DynamicResource Text}" 
+                HorizontalOptions="Start" />
+
+            <Frame BorderColor="{DynamicResource FrameBorderColor}" 
+                BackgroundColor="{DynamicResource FrameBackgroundColor}" 
+                CornerRadius="5" 
+                Padding="0" 
+                Margin="5" 
+                HasShadow="False">
+                    <Picker x:Name="RegionPicker"
                 ItemsSource="{Binding RegionOptions}"
                 SelectedIndexChanged="OnRegionFilterChanged"
-                HorizontalOptions="Fill" />
+                TextColor="{DynamicResource Text}" />
+            </Frame>
+            </VerticalStackLayout>
+
 
             <CollectionView x:Name="FilteredCollectionView"
                 ItemsSource="{Binding FilteredItems}"
