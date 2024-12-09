@@ -21,4 +21,9 @@
         Text="Dark/light Mode"
         IconImageSource="sun_moon.png"
         Clicked="OnToggleThemeButtonClicked" />
+
+    <MenuItem
+        Text="View Favorites"
+        IconImageSource="heart.png"
+        Clicked="OnToggleThemeButtonClicked" />
 </Shell>

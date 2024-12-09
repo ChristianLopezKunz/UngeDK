@@ -110,6 +110,8 @@
             <Button Text="Add to Favorites"
                     Clicked="AddToFavorites"
                     ImageSource="heart.png"
+                    BackgroundColor="#512BD4"
+                    TextColor="White"
                     FontSize="15"
                     FontAttributes="Bold"
                     Margin="0,20,0,0"

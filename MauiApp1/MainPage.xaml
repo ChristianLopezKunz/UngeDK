@@ -29,9 +29,6 @@
                TextColor="{DynamicResource Text}" />
             </Frame>
 
-            <Button Text="View Favorites"
-                    Command="{Binding NavigateToFavoritesCommand}" />
-
             <VerticalStackLayout Spacing="5">
                 <Label Text="Områder:" 
                 FontSize="16" 
