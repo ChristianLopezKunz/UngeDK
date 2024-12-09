@@ -2,15 +2,15 @@
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="MauiApp1.FavoritesPage"
-             Title="Favorites">
+             Title="">
 
     <ContentPage.Content>
         <StackLayout>
             <!-- Title -->
-            <Label Text="Your Favorite Jobs"
-                   FontSize="24"
+            <Label Text="favorit Jobs"
+                   FontSize="30"
                    HorizontalOptions="Center"
-                   Padding="10" />
+                   Padding="20" />
 
             <!-- ListView to display favorite jobs -->
             <ListView x:Name="FavoritesListView"
@@ -20,14 +20,15 @@
                         <ViewCell>
                             <StackLayout Padding="10" Orientation="Horizontal">
                                 <StackLayout>
-                                    <Label Text="{Binding JobTitle}" FontSize="18" />
-                                    <Label Text="{Binding CompanyName}" FontSize="14" />
-                                    <Label Text="{Binding GeographyDisplay}" FontSize="12" />
+                                    <Label Text="{Binding JobTitle}" FontSize="20" />
+                                    <Label Text="{Binding CompanyName}" FontSize="15" />
+                                    <Label Text="{Binding GeographyDisplay}" FontSize="13" />
                                 </StackLayout>
 
                                 <!-- Button to remove job from favorites -->
                                 <Button Text="Remove"
                                         Clicked="OnRemoveFavoriteClicked"
+                                        HorizontalOptions="End"
                                         CommandParameter="{Binding .}" />
                             </StackLayout>
                         </ViewCell>
