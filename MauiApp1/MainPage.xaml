@@ -49,10 +49,6 @@
                 </Frame>
             </VerticalStackLayout>
 
-            <Button Text="View Favorites" Clicked="OnViewFavoritesClicked" />
-
-
-
             <CollectionView x:Name="FilteredCollectionView"
                 ItemsSource="{Binding FilteredItems}"
                 SelectionMode="Single"

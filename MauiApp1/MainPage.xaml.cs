@@ -113,12 +113,5 @@ namespace MauiApp1
             // Deselect the item
             ((CollectionView)sender).SelectedItem = null;
         }
-
-        private async void OnViewFavoritesClicked(object sender, EventArgs e)
-        {
-            await Navigation.PushAsync(new FavoritesPage());
-        }
-
-
     }
 }

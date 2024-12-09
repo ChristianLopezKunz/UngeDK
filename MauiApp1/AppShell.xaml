@@ -25,5 +25,5 @@
     <MenuItem
         Text="View Favorites"
         IconImageSource="heart.png"
-        Clicked="OnToggleThemeButtonClicked" />
+        Clicked="OnViewFavoritesClicked" />
 </Shell>
