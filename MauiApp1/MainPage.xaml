@@ -15,20 +15,40 @@
                 SemanticProperties.HeadingLevel="Level1"
                 TextColor="{DynamicResource Text}" />
 
-            <Button Text="View Favorites"
-                    Command="{Binding NavigateToFavoritesCommand}" />
-            
-            <Label
-                Text="Fritidsjobs"
-                Style="{StaticResource SubHeadline}"
-                SemanticProperties.HeadingLevel="Level3"
-                SemanticProperties.Description="Fritidsjobs"
-                TextColor="{DynamicResource Text}" />
+            <Label/>
 
-            <SearchBar Placeholder="Søg Job, Firma og Lokation..."
-                       TextChanged="OnSearchTextChanged"
-                       x:Name="SearchBarControl"
-                       TextColor="{DynamicResource Text}" />
+            <Frame BorderColor="{DynamicResource FrameBorderColor}" 
+                BackgroundColor="{DynamicResource FrameBackgroundColor}" 
+                CornerRadius="5" 
+                Padding="0" 
+                Margin="5" 
+                HasShadow="False">
+                <SearchBar Placeholder="Søg efter jobtitel, virksomhed, nøgleord..."
+               TextChanged="OnSearchTextChanged"
+               x:Name="SearchBarControl"
+               TextColor="{DynamicResource Text}" />
+            </Frame>
+
+            <VerticalStackLayout Spacing="5">
+                <Label Text="Områder:" 
+                FontSize="16" 
+                FontAttributes="Bold" 
+                TextColor="{DynamicResource Text}" 
+                HorizontalOptions="Start" />
+
+            <Frame BorderColor="{DynamicResource FrameBorderColor}" 
+                BackgroundColor="{DynamicResource FrameBackgroundColor}" 
+                CornerRadius="5" 
+                Padding="0" 
+                Margin="5" 
+                HasShadow="False">
+                    <Picker x:Name="RegionPicker"
+                ItemsSource="{Binding RegionOptions}"
+                SelectedIndexChanged="OnRegionFilterChanged"
+                TextColor="{DynamicResource Text}" />
+            </Frame>
+            </VerticalStackLayout>
+
 
             <CollectionView x:Name="FilteredCollectionView"
                 ItemsSource="{Binding FilteredItems}"
