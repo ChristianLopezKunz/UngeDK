@@ -32,10 +32,6 @@ namespace MauiApp1
 
                     BindingContext = detailedJob; // Update with detailed job data
                 }
-                else
-                {
-                    await DisplayAlert("Error", "Unable to load job details.", "OK");
-                }
             }
             catch (Exception ex)
             {
