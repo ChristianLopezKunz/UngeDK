@@ -12,7 +12,6 @@ namespace MauiApp1
         private readonly MainViewModel _viewModel;
         private readonly ApiService _apiService;
         private CancellationTokenSource _debounceCts;
-        public ICommand NavigateToFavoritesCommand { get; }
 
         public MainPage()
         {
@@ -24,7 +23,6 @@ namespace MauiApp1
             // Fetch jobs initially
             Task.Run(() => LoadJobsFromApi());
 
-            NavigateToFavoritesCommand = new Command(async () => await NavigateToFavorites());
         }
 
         private async Task LoadJobsFromApi()
@@ -116,10 +114,11 @@ namespace MauiApp1
             ((CollectionView)sender).SelectedItem = null;
         }
 
-        private async Task NavigateToFavorites()
+        private async void OnViewFavoritesClicked(object sender, EventArgs e)
         {
             await Navigation.PushAsync(new FavoritesPage());
         }
+
 
     }
 }
