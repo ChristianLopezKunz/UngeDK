@@ -15,6 +15,9 @@
                 SemanticProperties.HeadingLevel="Level1"
                 TextColor="{DynamicResource Text}" />
 
+            <Button Text="View Favorites"
+                    Command="{Binding NavigateToFavoritesCommand}" />
+            
             <Label
                 Text="Fritidsjobs"
                 Style="{StaticResource SubHeadline}"
@@ -26,9 +29,6 @@
                        TextChanged="OnSearchTextChanged"
                        x:Name="SearchBarControl"
                        TextColor="{DynamicResource Text}" />
-            
-            <Button Text="View Favorites"
-                    Command="{Binding NavigateToFavoritesCommand}" />
 
             <CollectionView x:Name="FilteredCollectionView"
                 ItemsSource="{Binding FilteredItems}"
