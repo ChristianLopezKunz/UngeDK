@@ -1,5 +1,6 @@
-﻿using System.Collections.ObjectModel;
-using System.Windows.Input;
+﻿using System;
+using System.Collections.ObjectModel;
+using Microsoft.Maui.Controls;
 
 namespace MauiApp1
 {
@@ -19,15 +20,25 @@ namespace MauiApp1
         // Handle the "Remove" button click event
         private void OnRemoveFavoriteClicked(object sender, EventArgs e)
         {
-            // Get the job to remove
             if (sender is Button button && button.CommandParameter is Job job)
             {
-                // Remove the job from the global Favorites list
-                if (App.FavoritesList.Contains(job))
+                if (Favorites.Contains(job))
                 {
-                    App.FavoritesList.Remove(job);
+                    Favorites.Remove(job);
                 }
             }
+        }
+
+        // Handle job selection to navigate to the details page
+        private async void OnJobSelected(object sender, SelectionChangedEventArgs e)
+        {
+            if (e.CurrentSelection.FirstOrDefault() is Job selectedJob)
+            {
+                await Navigation.PushAsync(new JobDetailsPage(selectedJob));
+            }
+
+            // Deselect the item to avoid lingering selection
+            ((CollectionView)sender).SelectedItem = null;
         }
     }
 }

@@ -5,36 +5,42 @@
              Title="">
 
     <ContentPage.Content>
-        <StackLayout>
+        <VerticalStackLayout Padding="20" Spacing="10">
             <!-- Title -->
-            <Label Text="favorit Jobs"
+            <Label Text="Favorit Jobs"
                    FontSize="30"
                    HorizontalOptions="Center"
-                   Padding="20" />
+                   Padding="10" />
 
-            <!-- ListView to display favorite jobs -->
-            <ListView x:Name="FavoritesListView"
-                      ItemsSource="{Binding Favorites}">
-                <ListView.ItemTemplate>
+            <!-- CollectionView to Display Favorite Jobs -->
+            <CollectionView x:Name="FavoritesCollectionView"
+                            ItemsSource="{Binding Favorites}"
+                            SelectionMode="Single"
+                            SelectionChanged="OnJobSelected">
+                <CollectionView.ItemTemplate>
                     <DataTemplate>
-                        <ViewCell>
-                            <StackLayout Padding="10" Orientation="Horizontal">
-                                <StackLayout>
-                                    <Label Text="{Binding JobTitle}" FontSize="20" />
-                                    <Label Text="{Binding CompanyName}" FontSize="15" />
-                                    <Label Text="{Binding GeographyDisplay}" FontSize="13" />
-                                </StackLayout>
-
-                                <!-- Button to remove job from favorites -->
+                        <Frame BorderColor="{DynamicResource FrameBorderColor}" 
+                               BackgroundColor="{DynamicResource FrameBackgroundColor}"
+                               CornerRadius="5"
+                               Padding="10"
+                               Margin="8"
+                               HasShadow="False">
+                            <StackLayout>
+                                <Label Text="{Binding JobTitle}" 
+                                       FontSize="18" 
+                                       FontAttributes="Bold" 
+                                       TextColor="{DynamicResource Text}" />
+                                <Label Text="{Binding CompanyAndGeography}" 
+                                       FontSize="14" 
+                                       TextColor="{DynamicResource Text}" />
                                 <Button Text="Remove"
                                         Clicked="OnRemoveFavoriteClicked"
-                                        HorizontalOptions="End"
                                         CommandParameter="{Binding .}" />
                             </StackLayout>
-                        </ViewCell>
+                        </Frame>
                     </DataTemplate>
-                </ListView.ItemTemplate>
-            </ListView>
-        </StackLayout>
+                </CollectionView.ItemTemplate>
+            </CollectionView>
+        </VerticalStackLayout>
     </ContentPage.Content>
 </ContentPage>
