@@ -1,0 +1,39 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="MauiApp1.FavoritesPage"
+             Title="Favorites">
+
+    <ContentPage.Content>
+        <StackLayout>
+            <!-- Title -->
+            <Label Text="Your Favorite Jobs"
+                   FontSize="24"
+                   HorizontalOptions="Center"
+                   Padding="10" />
+
+            <!-- ListView to display favorite jobs -->
+            <ListView x:Name="FavoritesListView"
+                      ItemsSource="{Binding Favorites}">
+                <ListView.ItemTemplate>
+                    <DataTemplate>
+                        <ViewCell>
+                            <StackLayout Padding="10" Orientation="Horizontal">
+                                <StackLayout>
+                                    <Label Text="{Binding JobTitle}" FontSize="18" />
+                                    <Label Text="{Binding CompanyName}" FontSize="14" />
+                                    <Label Text="{Binding GeographyDisplay}" FontSize="12" />
+                                </StackLayout>
+
+                                <!-- Button to remove job from favorites -->
+                                <Button Text="Remove"
+                                        Clicked="OnRemoveFavoriteClicked"
+                                        CommandParameter="{Binding .}" />
+                            </StackLayout>
+                        </ViewCell>
+                    </DataTemplate>
+                </ListView.ItemTemplate>
+            </ListView>
+        </StackLayout>
+    </ContentPage.Content>
+</ContentPage>

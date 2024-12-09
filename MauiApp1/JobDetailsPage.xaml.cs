@@ -64,5 +64,24 @@ namespace MauiApp1
                 await DisplayAlert("Info", "No application link available for this job.", "OK");
             }
         }
+
+        // Handle "Add to Favorites" action
+        private void AddToFavorites(object sender, EventArgs e)
+        {
+            if (BindingContext is Job job)
+            {
+                // Add to favorites list (global list)
+                if (!App.FavoritesList.Contains(job))
+                {
+                    App.FavoritesList.Add(job);
+                    DisplayAlert("Success", $"{job.JobTitle} has been added to your favorites.", "OK");
+                }
+                else
+                {
+                    DisplayAlert("Already in Favorites", $"{job.JobTitle} is already in your favorites.", "OK");
+                }
+            }
+        }
+
     }
 }

@@ -106,6 +106,11 @@
                 FontAttributes="Bold"
                 Margin="0,20,0,0"
                 Clicked="OnOpenApplicationUrlClicked" />
+
+            <!-- Favorite Button -->
+            <Button Text="⭐ Add to Favorites"
+                    Clicked="AddToFavorites"
+                    CommandParameter="{Binding .}" />
         </VerticalStackLayout>
     </ScrollView>
 </ContentPage>

@@ -1,10 +1,13 @@
-﻿using System.Globalization;
+﻿using System.Collections.ObjectModel;
+using System.Globalization;
 
 namespace MauiApp1
 {
     public partial class App : Application
     {
         private AppTheme _currentTheme;
+        // Global list to store favorite jobs
+        public static ObservableCollection<Job> FavoritesList { get; set; }
 
         public App()
         {
@@ -21,6 +24,8 @@ namespace MauiApp1
 
             // Subscribe to theme changes
             Application.Current.RequestedThemeChanged += OnRequestedThemeChanged;
+
+            FavoritesList = new ObservableCollection<Job>();
         }
 
         private void ApplyTheme()

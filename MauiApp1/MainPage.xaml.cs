@@ -2,6 +2,7 @@
 using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
+using System.Windows.Input;
 using Microsoft.Maui.Controls;
 
 namespace MauiApp1
@@ -11,6 +12,7 @@ namespace MauiApp1
         private readonly MainViewModel _viewModel;
         private readonly ApiService _apiService;
         private CancellationTokenSource _debounceCts;
+        public ICommand NavigateToFavoritesCommand { get; }
 
         public MainPage()
         {
@@ -21,6 +23,8 @@ namespace MauiApp1
 
             // Fetch jobs initially
             Task.Run(() => LoadJobsFromApi());
+
+            NavigateToFavoritesCommand = new Command(async () => await NavigateToFavorites());
         }
 
         private async Task LoadJobsFromApi()
@@ -102,5 +106,11 @@ namespace MauiApp1
             // Deselect the item
             ((CollectionView)sender).SelectedItem = null;
         }
+
+        private async Task NavigateToFavorites()
+        {
+            await Navigation.PushAsync(new FavoritesPage());
+        }
+
     }
 }
