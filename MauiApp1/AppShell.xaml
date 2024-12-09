@@ -24,6 +24,11 @@
 
     <!-- Menu Items -->
     <MenuItem
+        Text="Hovedsiden"
+        IconImageSource="home.png"
+        Clicked="OnNavigateToMainPageClicked" />
+    
+    <MenuItem
         Text="Dark/light Mode"
         IconImageSource="sun_moon.png"
         Clicked="OnToggleThemeButtonClicked" />
@@ -32,4 +37,5 @@
         Text="Vis Favoriter"
         IconImageSource="heart.png"
         Clicked="OnViewFavoritesClicked" />
+
 </Shell>
