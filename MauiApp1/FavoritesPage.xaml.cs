@@ -17,14 +17,24 @@ namespace MauiApp1
             BindingContext = this; // Set the binding context to the page itself
         }
 
-        // Handle the "Remove" button click event
-        private void OnRemoveFavoriteClicked(object sender, EventArgs e)
+        // Handle the "Remove" button click event with confirmation
+        private async void OnRemoveFavoriteClicked(object sender, EventArgs e)
         {
             if (sender is Button button && button.CommandParameter is Job job)
             {
-                if (Favorites.Contains(job))
+                // Display confirmation popup
+                bool confirm = await DisplayAlert(
+                    "Bekræft Fjernelse",
+                    $"Er du sikker på, at du vil fjerne \"{job.JobTitle}\" fra dine favoritter?",
+                    "Ja", "Nej");
+
+                if (confirm)
                 {
-                    Favorites.Remove(job);
+                    // Remove the job from the list if confirmed
+                    if (Favorites.Contains(job))
+                    {
+                        Favorites.Remove(job);
+                    }
                 }
             }
         }

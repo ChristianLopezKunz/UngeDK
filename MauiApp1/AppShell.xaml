@@ -16,7 +16,13 @@
         ContentTemplate="{DataTemplate local:MainPage}"
         Route="MainPage" />
 
-    <!-- Add MenuItem for theme toggle -->
+    <!-- Favorites Page -->
+    <ShellContent
+        ContentTemplate="{DataTemplate local:FavoritesPage}"
+        Route="FavoritesPage"
+        IsVisible="False" />
+
+    <!-- Menu Items -->
     <MenuItem
         Text="Dark/light Mode"
         IconImageSource="sun_moon.png"

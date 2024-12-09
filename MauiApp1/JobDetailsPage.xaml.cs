@@ -70,14 +70,13 @@ namespace MauiApp1
                 if (!App.FavoritesList.Contains(job))
                 {
                     App.FavoritesList.Add(job);
-                    DisplayAlert("Success", $"{job.JobTitle} has been added to your favorites.", "OK");
+                    DisplayAlert("Tilføjet til favoriter", $"{job.JobTitle} er blevet tilføjet til dine favoriter.", "OK");
                 }
                 else
                 {
-                    DisplayAlert("Already in Favorites", $"{job.JobTitle} is already in your favorites.", "OK");
+                    DisplayAlert("Allereder i favoriter", $"{job.JobTitle} er allerede i din favoriter.", "OK");
                 }
             }
         }
-
     }
 }

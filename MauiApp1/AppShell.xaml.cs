@@ -30,6 +30,9 @@ namespace MauiApp1
         private async void OnViewFavoritesClicked(object sender, EventArgs e)
         {
             await Navigation.PushAsync(new FavoritesPage());
+
+            FlyoutIsPresented = false;
+
         }
     }
 }
