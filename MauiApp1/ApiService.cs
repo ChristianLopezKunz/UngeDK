@@ -96,21 +96,6 @@ namespace MauiApp1
         public string ApplicationUrl { get; set; }
         public string CompanyAndGeography => $"{CompanyName}, {GeographyDisplay}";
 
-        public override bool Equals(object obj)
-        {
-            if (obj is Job otherJob)
-            {
-                return this.Id == otherJob.Id; // Compare by unique Id
-            }
-            return false;
-        }
-
-        public override int GetHashCode()
-        {
-            return Id.GetHashCode(); // Use Id's hash code
-        }
-
-        // Static mapping of geography IDs to names
         private static readonly Dictionary<int, string> GeographyMapping = new Dictionary<int, string>
     {
         { 2, "Storkøbenhavn" },
