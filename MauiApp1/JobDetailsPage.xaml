@@ -108,8 +108,12 @@
                 Clicked="OnOpenApplicationUrlClicked" />
 
             <!-- Favorite Button -->
-            <Button Text="⭐ Add to Favorites"
+            <Button Text="Add to Favorites"
                     Clicked="AddToFavorites"
+                    ImageSource="heart.png"
+                    FontSize="15"
+                    FontAttributes="Bold"
+                    Margin="0,20,0,0"
                     CommandParameter="{Binding .}" />
         </VerticalStackLayout>
     </ScrollView>
