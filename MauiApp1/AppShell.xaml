@@ -16,13 +16,9 @@
         ContentTemplate="{DataTemplate local:MainPage}"
         Route="MainPage" />
 
-    <!-- Add ToolbarItem for theme toggle -->
-    <Shell.ToolbarItems>
-        <ToolbarItem 
-            IconImageSource="sun_moon.png"
-            Priority="0" 
-            Order="Primary" 
-            Clicked="OnToggleThemeButtonClicked" />
-    </Shell.ToolbarItems>
+    <!-- Add MenuItem for theme toggle -->
+    <MenuItem
+        Text="Dark/light Mode"
+        IconImageSource="sun_moon.png"
+        Clicked="OnToggleThemeButtonClicked" />
 </Shell>
-    
