@@ -1,5 +1,7 @@
 ﻿using System.Collections.ObjectModel;
 using System.Globalization;
+using System.Text.Json; // For JSON serialization/deserialization
+using Microsoft.Maui.Storage; // For file storage access
 
 namespace MauiApp1
 {
@@ -26,7 +28,12 @@ namespace MauiApp1
             // Subscribe to theme changes
             Application.Current.RequestedThemeChanged += OnRequestedThemeChanged;
 
+            // Initialize FavoritesList and load cached data
             FavoritesList = new ObservableCollection<Job>();
+            Task.Run(async () => await LoadFavoritesFromStorageAsync());
+
+            // Save to storage whenever the list changes
+            FavoritesList.CollectionChanged += async (sender, e) => await SaveFavoritesToStorageAsync();
         }
 
         private void ApplyTheme()
@@ -88,5 +95,50 @@ namespace MauiApp1
         {
             return new Window(new AppShell());
         }
+
+        // Save FavoritesList to local storage
+        public static async Task SaveFavoritesToStorageAsync()
+        {
+            try
+            {
+                string favoritesJson = JsonSerializer.Serialize(FavoritesList);
+                string filePath = FileSystem.AppDataDirectory + "/favorites.json";
+                await File.WriteAllTextAsync(filePath, favoritesJson);
+            }
+            catch (Exception ex)
+            {
+                // Handle potential errors, e.g., log them
+                Console.WriteLine($"Error saving favorites: {ex.Message}");
+            }
+        }
+
+        // Load FavoritesList from local storage
+        public static async Task LoadFavoritesFromStorageAsync()
+        {
+            try
+            {
+                string filePath = FileSystem.AppDataDirectory + "/favorites.json";
+
+                if (File.Exists(filePath))
+                {
+                    string favoritesJson = await File.ReadAllTextAsync(filePath);
+                    var loadedFavorites = JsonSerializer.Deserialize<ObservableCollection<Job>>(favoritesJson);
+
+                    if (loadedFavorites != null)
+                    {
+                        foreach (var job in loadedFavorites)
+                        {
+                            FavoritesList.Add(job);
+                        }
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                // Handle potential errors, e.g., log them
+                Console.WriteLine($"Error loading favorites: {ex.Message}");
+            }
+        }
+
     }
 }
