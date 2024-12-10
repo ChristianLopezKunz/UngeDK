@@ -5,9 +5,11 @@
              BackgroundColor="{DynamicResource Background}">
 
     <ScrollView>
-        <VerticalStackLayout
-            Padding="30,0"
-            Spacing="25">
+        <VerticalStackLayout>
+            <Image Source="logo.png" 
+               HorizontalOptions="Center" 
+               VerticalOptions="CenterAndExpand"
+               WidthRequest="500" HeightRequest="250"/>
 
             <Label
                 Text="Unge DK"
