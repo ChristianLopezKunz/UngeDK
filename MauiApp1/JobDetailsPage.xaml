@@ -90,13 +90,23 @@
             </Grid>
 
             <Label Text="Om stillingen:" 
-       FontAttributes="Bold" 
-       FontSize="20" 
-       Margin="0,50,0,0" 
-       TextColor="{DynamicResource Text}" />
+                FontAttributes="Bold" 
+                FontSize="20" 
+                Margin="0,50,0,0" 
+                TextColor="{DynamicResource Text}" />
 
+            <Frame BorderColor="{DynamicResource FrameBorderColor}" 
+                   BackgroundColor="{DynamicResource FrameBackgroundColor}"
+                   CornerRadius="5"
+                   Padding="0"
+                   HasShadow="False"
+                   HeightRequest="500">
             <WebView x:Name="ContentWebView"
-         HeightRequest="500" />
+                   Navigated="OnWebViewNavigated"
+                   BackgroundColor="{DynamicResource FrameBackgroundColor}" />
+            </Frame>
+
+
 
 
 

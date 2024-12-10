@@ -90,5 +90,20 @@ namespace MauiApp1
                 }
             }
         }
+
+        private void OnWebViewNavigated(object sender, WebNavigatedEventArgs e)
+        {
+            var currentTheme = Application.Current.RequestedTheme;
+
+            // Adjust background color based on the current theme
+            string backgroundColor = currentTheme == AppTheme.Dark ? "#333333" : "#FFFFFF";
+            string textColor = currentTheme == AppTheme.Dark ? "#FFFFFF" : "#000000";
+
+            // Inject JavaScript to update content background and text color
+            string js = $"document.body.style.backgroundColor = '{backgroundColor}'; " +
+                        $"document.body.style.color = '{textColor}';";
+            ContentWebView.Eval(js);
+        }
+
     }
 }
