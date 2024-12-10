@@ -15,6 +15,16 @@ namespace MauiApp1
             // Bind FavoritesList from App.xaml.cs to the page
             Favorites = App.FavoritesList;
             BindingContext = this; // Set the binding context to the page itself
+
+            // Subscribe to changes in the Favorites list
+            Favorites.CollectionChanged += OnFavoritesCollectionChanged;
+        }
+
+        // Refresh UI if the favorites list changes
+        private void OnFavoritesCollectionChanged(object sender, System.Collections.Specialized.NotifyCollectionChangedEventArgs e)
+        {
+            // Notify the UI to refresh the binding
+            OnPropertyChanged(nameof(Favorites));
         }
 
         // Handle the "Remove" button click event with confirmation
