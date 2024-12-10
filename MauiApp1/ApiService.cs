@@ -95,6 +95,8 @@ namespace MauiApp1
         public List<int> Geography { get; set; }
         public string ApplicationUrl { get; set; }
         public string CompanyAndGeography => $"{CompanyName}, {GeographyDisplay}";
+        public string Content { get; set; }
+
 
         private static readonly Dictionary<int, string> GeographyMapping = new Dictionary<int, string>
     {
