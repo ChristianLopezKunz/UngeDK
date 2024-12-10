@@ -1,13 +1,133 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="MauiApp1.JobDetailsPage"
-             Title="Job Details">
+             BackgroundColor="{DynamicResource Background}">
+
     <ScrollView>
-        <StackLayout Padding="10">
-            <Label Text="{Binding JobTitle}" FontSize="24" FontAttributes="Bold" />
-            <Label Text="{Binding CompanyName}" FontSize="18" />
-            <Label Text="{Binding ModifiedDate, StringFormat='Updated: {0:d}'}" FontSize="14" />
-            <Label Text="{Binding Description}" FontSize="16" />
-        </StackLayout>
+        <VerticalStackLayout Padding="10">
+
+            <Label Text="{Binding JobTitle}" 
+               FontSize="35"
+               Margin="0,20,0,50"
+               TextColor="{DynamicResource Text}" />
+            
+            <Grid RowDefinitions="Auto, Auto, Auto" ColumnDefinitions="*">
+                <Frame Grid.Row="0"
+               BorderColor="{DynamicResource FrameBorderColor}" 
+               BackgroundColor="{DynamicResource FrameBackgroundColor}"
+               CornerRadius="5"
+               Padding="5"
+               Margin="5"
+               HasShadow="False"
+               HorizontalOptions="Fill"
+               VerticalOptions="Center">
+                    <StackLayout InputTransparent="True"
+                HorizontalOptions="Center"
+                VerticalOptions="Center"
+                Spacing="5">
+                        <Label Text="Firma:" 
+                FontAttributes="Bold" 
+                FontSize="20"
+                TextColor="{DynamicResource Text}" 
+                HorizontalOptions="Center" />
+                        <Label Text="{Binding CompanyName}" 
+                FontSize="18"
+                TextColor="{DynamicResource Text}" 
+                HorizontalOptions="Center" />
+                    </StackLayout>
+                </Frame>
+
+                <Frame Grid.Row="1"
+               BorderColor="{DynamicResource FrameBorderColor}" 
+               BackgroundColor="{DynamicResource FrameBackgroundColor}"
+               CornerRadius="5"
+               Padding="5"
+               Margin="5"
+               HasShadow="False"
+               HorizontalOptions="Fill"
+               VerticalOptions="Center">
+                    <StackLayout InputTransparent="True"
+                HorizontalOptions="Center"
+                VerticalOptions="Center"
+                Spacing="5">
+                        <Label Text="Frist:" 
+                FontAttributes="Bold" 
+                FontSize="20"
+                TextColor="{DynamicResource Text}" 
+                HorizontalOptions="Center" />
+                        <Label Text="{Binding ApplicationDeadlineDisplay}" 
+                FontSize="18"
+                TextColor="{DynamicResource Text}" 
+                HorizontalOptions="Center" />
+                    </StackLayout>
+                </Frame>
+
+                <Frame Grid.Row="2"
+               BorderColor="{DynamicResource FrameBorderColor}" 
+               BackgroundColor="{DynamicResource FrameBackgroundColor}"
+               CornerRadius="5"
+               Padding="5"
+               Margin="5"
+               HasShadow="False"
+               HorizontalOptions="Fill"
+               VerticalOptions="Center">
+                    <StackLayout InputTransparent="True"
+                HorizontalOptions="Center"
+                VerticalOptions="Center"
+                Spacing="5">
+                        <Label Text="Lokation:" 
+                FontAttributes="Bold" 
+                FontSize="20"
+                TextColor="{DynamicResource Text}" 
+                HorizontalOptions="Center" />
+                        <Label Text="{Binding GeographyDisplay}" 
+                FontSize="18"
+                TextColor="{DynamicResource Text}" 
+                HorizontalOptions="Center" />
+                    </StackLayout>
+                </Frame>
+            </Grid>
+
+            <Label Text="Om stillingen:" 
+                FontAttributes="Bold" 
+                FontSize="20" 
+                Margin="0,50,0,0" 
+                TextColor="{DynamicResource Text}" />
+
+            <Frame BorderColor="{DynamicResource FrameBorderColor}" 
+                   BackgroundColor="{DynamicResource FrameBackgroundColor}"
+                   CornerRadius="5"
+                   Padding="0"
+                   HasShadow="False"
+                   HeightRequest="500">
+            <WebView x:Name="ContentWebView"
+                   Navigated="OnWebViewNavigated"
+                   BackgroundColor="{DynamicResource FrameBackgroundColor}" />
+            </Frame>
+
+
+
+
+
+            <Button Text="Ansøg"
+                ImageSource="pencil.png"
+                BackgroundColor="#ffbc2c"
+                TextColor="White"
+                FontSize="15"
+                FontAttributes="Bold"
+                Margin="0,20,0,0"
+                Clicked="OnOpenApplicationUrlClicked" />
+            
+            <Button Text="Add to Favorites"
+                    Clicked="AddToFavorites"
+                    ImageSource="heart.png"
+                    BackgroundColor="#512BD4"
+                    TextColor="White"
+                    FontSize="15"
+                    FontAttributes="Bold"
+                    Margin="0,20,0,0"
+                    CommandParameter="{Binding .}" />
+        </VerticalStackLayout>
     </ScrollView>
 </ContentPage>

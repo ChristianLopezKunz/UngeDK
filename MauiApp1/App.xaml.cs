@@ -1,10 +1,15 @@
-﻿using System.Globalization;
+﻿using System.Collections.ObjectModel;
+using System.Globalization;
+using System.Text.Json; // For JSON serialization/deserialization
+using Microsoft.Maui.Storage; // For file storage access
 
 namespace MauiApp1
 {
     public partial class App : Application
     {
         private AppTheme _currentTheme;
+        // Global list to store favorite jobs
+        public static ObservableCollection<Job> FavoritesList { get; set; }
 
         public App()
         {
@@ -15,12 +20,20 @@ namespace MauiApp1
             CultureInfo.DefaultThreadCurrentCulture = culture;
             CultureInfo.DefaultThreadCurrentUICulture = culture;
 
-            // Initialize the current theme
-            _currentTheme = Application.Current.RequestedTheme;
+            // Retrieve the saved theme preference, default to Light if not found
+            var savedTheme = Preferences.Get("themePreference", "Light");
+            _currentTheme = savedTheme == "Dark" ? AppTheme.Dark : AppTheme.Light;
             ApplyTheme();
 
             // Subscribe to theme changes
             Application.Current.RequestedThemeChanged += OnRequestedThemeChanged;
+
+            // Initialize FavoritesList and load cached data
+            FavoritesList = new ObservableCollection<Job>();
+            Task.Run(async () => await LoadFavoritesFromStorageAsync());
+
+            // Save to storage whenever the list changes
+            FavoritesList.CollectionChanged += async (sender, e) => await SaveFavoritesToStorageAsync();
         }
 
         private void ApplyTheme()
@@ -60,8 +73,10 @@ namespace MauiApp1
                 Resources["FrameBorderColor"] = Resources.TryGetValue("FrameBorderColorLight", out var frameBorderLight) ? frameBorderLight : Colors.Black;
                 Resources["FrameBackgroundColor"] = Resources.TryGetValue("FrameBackgroundColorLight", out var frameBackgroundLight) ? frameBackgroundLight : Colors.White;
             }
-        }
 
+            // Save the current theme to Preferences
+            Preferences.Set("themePreference", _currentTheme == AppTheme.Dark ? "Dark" : "Light");
+        }
 
         public void ToggleTheme()
         {
@@ -80,5 +95,50 @@ namespace MauiApp1
         {
             return new Window(new AppShell());
         }
+
+        // Save FavoritesList to local storage
+        public static async Task SaveFavoritesToStorageAsync()
+        {
+            try
+            {
+                string favoritesJson = JsonSerializer.Serialize(FavoritesList);
+                string filePath = FileSystem.AppDataDirectory + "/favorites.json";
+                await File.WriteAllTextAsync(filePath, favoritesJson);
+            }
+            catch (Exception ex)
+            {
+                // Handle potential errors, e.g., log them
+                Console.WriteLine($"Error saving favorites: {ex.Message}");
+            }
+        }
+
+        // Load FavoritesList from local storage
+        public static async Task LoadFavoritesFromStorageAsync()
+        {
+            try
+            {
+                string filePath = FileSystem.AppDataDirectory + "/favorites.json";
+
+                if (File.Exists(filePath))
+                {
+                    string favoritesJson = await File.ReadAllTextAsync(filePath);
+                    var loadedFavorites = JsonSerializer.Deserialize<ObservableCollection<Job>>(favoritesJson);
+
+                    if (loadedFavorites != null)
+                    {
+                        foreach (var job in loadedFavorites)
+                        {
+                            FavoritesList.Add(job);
+                        }
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                // Handle potential errors, e.g., log them
+                Console.WriteLine($"Error loading favorites: {ex.Message}");
+            }
+        }
+
     }
 }

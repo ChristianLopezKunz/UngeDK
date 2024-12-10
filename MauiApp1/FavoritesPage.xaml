@@ -1,0 +1,46 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="MauiApp1.FavoritesPage"
+             Title="">
+
+    <ContentPage.Content>
+        <VerticalStackLayout Padding="20" Spacing="10">
+            <!-- Title -->
+            <Label Text="Favorit Jobs"
+                   FontSize="30"
+                   HorizontalOptions="Center"
+                   Padding="10" />
+
+            <!-- CollectionView to Display Favorite Jobs -->
+            <CollectionView x:Name="FavoritesCollectionView"
+                            ItemsSource="{Binding Favorites}"
+                            SelectionMode="Single"
+                            SelectionChanged="OnJobSelected">
+                <CollectionView.ItemTemplate>
+                    <DataTemplate>
+                        <Frame BorderColor="{DynamicResource FrameBorderColor}" 
+                               BackgroundColor="{DynamicResource FrameBackgroundColor}"
+                               CornerRadius="5"
+                               Padding="10"
+                               Margin="8"
+                               HasShadow="False">
+                            <StackLayout>
+                                <Label Text="{Binding JobTitle}" 
+                                       FontSize="18" 
+                                       FontAttributes="Bold" 
+                                       TextColor="{DynamicResource Text}" />
+                                <Label Text="{Binding CompanyAndGeography}" 
+                                       FontSize="14" 
+                                       TextColor="{DynamicResource Text}" />
+                                <Button Text="Remove"
+                                        Clicked="OnRemoveFavoriteClicked"
+                                        CommandParameter="{Binding .}" />
+                            </StackLayout>
+                        </Frame>
+                    </DataTemplate>
+                </CollectionView.ItemTemplate>
+            </CollectionView>
+        </VerticalStackLayout>
+    </ContentPage.Content>
+</ContentPage>

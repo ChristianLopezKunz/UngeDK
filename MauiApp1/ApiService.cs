@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Net.Http;
 using System.Threading.Tasks;
+using System.Windows.Input;
 using Newtonsoft.Json;
 
 namespace MauiApp1
@@ -35,10 +36,33 @@ namespace MauiApp1
                 return null;
             }
         }
+        public async Task<JobDetailsResponse> GetJobDetailsAsync(string jobId)
+        {
+            try
+            {
+                string url = $"https://studerendeonline.dk/api/ungdk/job/{jobId}?apikey={ApiKey}";
+                HttpResponseMessage response = await _httpClient.GetAsync(url);
+                response.EnsureSuccessStatusCode();
+
+                string jsonResponse = await response.Content.ReadAsStringAsync();
+                return JsonConvert.DeserializeObject<JobDetailsResponse>(jsonResponse);
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine($"Error: {ex.Message}");
+                return null;
+            }
+        }
 
     }
-
-    // API Response model
+    // Job details response model
+    public class JobDetailsResponse
+    {
+        public string Status { get; set; }
+        public string Message { get; set; }
+        public Job Data { get; set; }
+    }
+    // Job list API Response model
     public class JobListApiResponse
     {
         public string Status { get; set; }
@@ -46,8 +70,17 @@ namespace MauiApp1
         public int Total { get; set; }
         public List<Job> Jobs { get; set; }
     }
+    public class JobDetails
+    {
+        public string CompanyName { get; set; }
+        public string ApplicationDeadline { get; set; }
+        public string Description { get; set; }
+        public string Location { get; set; }
+        public string Content { get; set; }
+        public string ApplicationUrl { get; set; }
+    }
 
-    // Job model
+    // Job list model
     public class Job
     {
         public string Id { get; set; }
@@ -60,5 +93,51 @@ namespace MauiApp1
         public string Resume { get; set; }
         public int JobLevel { get; set; }
         public List<int> Geography { get; set; }
+        public string ApplicationUrl { get; set; }
+        public string CompanyAndGeography => $"{CompanyName}, {GeographyDisplay}";
+        public string Content { get; set; }
+
+
+        private static readonly Dictionary<int, string> GeographyMapping = new Dictionary<int, string>
+    {
+        { 2, "Storkøbenhavn" },
+        { 3, "Nordsjælland" },
+        { 14, "Østsjælland" },
+        { 4, "Vestsjælland" },
+        { 5, "Sydsjælland & Øer" },
+        { 13, "Fyn" },
+        { 12, "Sønderjylland" },
+        { 11, "Sydvestjylland (Esbjerg)" },
+        { 9, "Vestjylland" },
+        { 10, "Sydøstjylland" },
+        { 7, "Midtjylland" },
+        { 6, "Østjylland (Aarhus)" },
+        { 8, "Nordjylland" },
+        { 20, "Bornholm" }
+    };
+
+        public string GeographyDisplay
+        {
+            get
+            {
+                if (Geography == null || !Geography.Any())
+                    return "Ingen resultater";
+
+                var geographyNames = Geography
+                    .Where(id => GeographyMapping.ContainsKey(id))
+                    .Select(id => GeographyMapping[id]);
+
+                return geographyNames.Any() ? string.Join(", ", geographyNames) : "Ingen resultater";
+            }
+        }
+
+        public string ApplicationDeadlineDisplay
+        {
+            get
+            {
+                return string.IsNullOrWhiteSpace(ApplicationDate) ? "snarest muligt" : ApplicationDate;
+            }
+        }
+
     }
 }

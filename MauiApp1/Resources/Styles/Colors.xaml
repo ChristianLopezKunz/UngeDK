@@ -28,15 +28,12 @@
     <Color x:Key="Gray950">#141414</Color>
 
     <!-- Light Theme Colors -->
-    <Color x:Key="PrimaryLight">#512BD4</Color>
-    <Color x:Key="SecondaryLight">#DFD8F7</Color>
     <Color x:Key="BackgroundLight">#FFFFFF</Color>
     <Color x:Key="TextLight">#000000</Color>
 
     <!-- Dark Theme Colors -->
     <Color x:Key="BackgroundDark">#1f1f1f</Color>
     <Color x:Key="TextDark">#FFFFFF</Color>
-    <Color x:Key="SecondaryDark">#9880e5</Color>
 
     <!-- Colors for Navigation Bars -->
     <Color x:Key="NavBarBackgroundLight">#FFFFFF</Color>
