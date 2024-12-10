@@ -18,8 +18,9 @@ namespace MauiApp1
             CultureInfo.DefaultThreadCurrentCulture = culture;
             CultureInfo.DefaultThreadCurrentUICulture = culture;
 
-            // Initialize the current theme
-            _currentTheme = Application.Current.RequestedTheme;
+            // Retrieve the saved theme preference, default to Light if not found
+            var savedTheme = Preferences.Get("themePreference", "Light");
+            _currentTheme = savedTheme == "Dark" ? AppTheme.Dark : AppTheme.Light;
             ApplyTheme();
 
             // Subscribe to theme changes
@@ -65,8 +66,10 @@ namespace MauiApp1
                 Resources["FrameBorderColor"] = Resources.TryGetValue("FrameBorderColorLight", out var frameBorderLight) ? frameBorderLight : Colors.Black;
                 Resources["FrameBackgroundColor"] = Resources.TryGetValue("FrameBackgroundColorLight", out var frameBackgroundLight) ? frameBackgroundLight : Colors.White;
             }
-        }
 
+            // Save the current theme to Preferences
+            Preferences.Set("themePreference", _currentTheme == AppTheme.Dark ? "Dark" : "Light");
+        }
 
         public void ToggleTheme()
         {
