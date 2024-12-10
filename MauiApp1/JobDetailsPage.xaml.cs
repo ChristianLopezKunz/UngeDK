@@ -93,17 +93,48 @@ namespace MauiApp1
 
         private void OnWebViewNavigated(object sender, WebNavigatedEventArgs e)
         {
+            ApplyWebViewTheme();
+        }
+
+        private void ApplyWebViewTheme()
+        {
             var currentTheme = Application.Current.RequestedTheme;
 
-            // Adjust background color based on the current theme
-            string backgroundColor = currentTheme == AppTheme.Dark ? "#333333" : "#FFFFFF";
-            string textColor = currentTheme == AppTheme.Dark ? "#FFFFFF" : "#000000";
+            // Use ternary operators to set colors based on the theme
+            string backgroundColor = currentTheme == AppTheme.Light ? "#FFFFFF" : "#333333";
+            string textColor = currentTheme == AppTheme.Light ? "#000000" : "#FFFFFF";
 
             // Inject JavaScript to update content background and text color
-            string js = $"document.body.style.backgroundColor = '{backgroundColor}'; " +
-                        $"document.body.style.color = '{textColor}';";
+            string js = $@"
+        document.body.style.backgroundColor = '{backgroundColor}';
+        document.body.style.color = '{textColor}';
+        Array.from(document.getElementsByTagName('a')).forEach(link => {{
+            link.style.color = '{textColor}';
+        }});
+    ";
+
             ContentWebView.Eval(js);
         }
+
+        // Listen for theme changes
+        protected override void OnAppearing()
+        {
+            base.OnAppearing();
+            Application.Current.RequestedThemeChanged += OnRequestedThemeChanged;
+            ApplyWebViewTheme(); // Apply the theme on initial load
+        }
+
+        protected override void OnDisappearing()
+        {
+            base.OnDisappearing();
+            Application.Current.RequestedThemeChanged -= OnRequestedThemeChanged;
+        }
+
+        private void OnRequestedThemeChanged(object sender, AppThemeChangedEventArgs e)
+        {
+            ApplyWebViewTheme();
+        }
+
 
     }
 }
