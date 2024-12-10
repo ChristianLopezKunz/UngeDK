@@ -24,13 +24,22 @@ namespace MauiApp1
                 {
                     var detailedJob = jobDetailsResponse.Data;
 
-                    // Preserve Geography if it is null in the detailed job
-                    if (BindingContext is Job existingJob && detailedJob.Geography == null)
+                    // Combine basic `Job` data and detailed `JobDetails`
+                    if (BindingContext is Job basicJob)
                     {
-                        detailedJob.Geography = existingJob.Geography;
+                        detailedJob.Id = basicJob.Id; // Ensure continuity
+                        detailedJob.JobTitle = basicJob.JobTitle;
+                        detailedJob.CompanyName = basicJob.CompanyName;
+                        detailedJob.Geography = basicJob.Geography;
                     }
 
-                    BindingContext = detailedJob; // Update with detailed job data
+                    BindingContext = detailedJob;
+
+                    // Update WebView Source
+                    ContentWebView.Source = new HtmlWebViewSource
+                    {
+                        Html = detailedJob.Content ?? "<p>No content available.</p>"
+                    };
                 }
             }
             catch (Exception ex)
@@ -39,6 +48,9 @@ namespace MauiApp1
                 await DisplayAlert("Error", "An error occurred while fetching job details.", "OK");
             }
         }
+
+
+
 
         // Handle application URL button click
         private async void OnOpenApplicationUrlClicked(object sender, EventArgs e)
