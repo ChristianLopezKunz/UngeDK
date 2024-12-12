@@ -78,7 +78,6 @@ namespace MauiApp1
         {
             if (BindingContext is Job job)
             {
-                // Add to favorites list (global list)
                 if (!App.FavoritesList.Contains(job))
                 {
                     App.FavoritesList.Add(job);
@@ -86,7 +85,7 @@ namespace MauiApp1
                 }
                 else
                 {
-                    DisplayAlert("Allereder i favoriter", $"{job.JobTitle} er allerede i din favoriter.", "OK");
+                    DisplayAlert("Allerede i favoriter", $"{job.JobTitle} er allerede i din favoriter.", "OK");
                 }
             }
         }

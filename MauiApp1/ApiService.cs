@@ -139,5 +139,19 @@ namespace MauiApp1
             }
         }
 
+        // Override Equals and GetHashCode to compare Job objects by their Id
+        public override bool Equals(object obj)
+        {
+            if (obj is Job otherJob)
+            {
+                return string.Equals(Id, otherJob.Id, StringComparison.OrdinalIgnoreCase);
+            }
+            return false;
+        }
+
+        public override int GetHashCode()
+        {
+            return Id?.GetHashCode(StringComparison.OrdinalIgnoreCase) ?? 0;
+        }
     }
 }

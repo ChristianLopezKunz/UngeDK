@@ -33,7 +33,7 @@
                                 <Label Text="{Binding CompanyAndGeography}" 
                                        FontSize="14" 
                                        TextColor="{DynamicResource Text}" />
-                                <Button Text="Remove"
+                                <Button Text="Fjern"
                                         Clicked="OnRemoveFavoriteClicked"
                                         CommandParameter="{Binding .}" />
                             </StackLayout>
