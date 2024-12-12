@@ -95,17 +95,12 @@
                 Margin="0,50,0,0" 
                 TextColor="{DynamicResource Text}" />
 
-            <Frame BorderColor="{DynamicResource FrameBorderColor}" 
-                   BackgroundColor="{DynamicResource FrameBackgroundColor}"
-                   CornerRadius="5"
-                   Padding="0"
-                   HasShadow="False"
-                   HeightRequest="500">
-            <WebView x:Name="ContentWebView"
-                   Navigated="OnWebViewNavigated"
-                   BackgroundColor="{DynamicResource FrameBackgroundColor}" />
-            </Frame>
-
+            <!-- Display HTML content -->
+            <Label Text="{Binding Content}"
+                   TextType="Html"
+                   Margin="0,10,0,0"
+                   FontSize="16"
+                   TextColor="{DynamicResource Text}" />
 
 
 

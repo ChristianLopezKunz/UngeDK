@@ -24,10 +24,9 @@ namespace MauiApp1
                 {
                     var detailedJob = jobDetailsResponse.Data;
 
-                    // Combine basic `Job` data and detailed `JobDetails`
                     if (BindingContext is Job basicJob)
                     {
-                        detailedJob.Id = basicJob.Id; // Ensure continuity
+                        detailedJob.Id = basicJob.Id;
                         detailedJob.JobTitle = basicJob.JobTitle;
                         detailedJob.CompanyName = basicJob.CompanyName;
                         detailedJob.Geography = basicJob.Geography;
@@ -35,11 +34,8 @@ namespace MauiApp1
 
                     BindingContext = detailedJob;
 
-                    // Update WebView Source
-                    ContentWebView.Source = new HtmlWebViewSource
-                    {
-                        Html = detailedJob.Content ?? "<p>No content available.</p>"
-                    };
+                    // Ensure Content is not null
+                    detailedJob.Content ??= "<p>No content available.</p>";
                 }
             }
             catch (Exception ex)
@@ -90,51 +86,5 @@ namespace MauiApp1
                 }
             }
         }
-
-        private void OnWebViewNavigated(object sender, WebNavigatedEventArgs e)
-        {
-            ApplyWebViewTheme();
-        }
-
-        private void ApplyWebViewTheme()
-        {
-            var currentTheme = Application.Current.RequestedTheme;
-
-            // Use ternary operators to set colors based on the theme
-            string backgroundColor = currentTheme == AppTheme.Light ? "#FFFFFF" : "#333333";
-            string textColor = currentTheme == AppTheme.Light ? "#000000" : "#FFFFFF";
-
-            // Inject JavaScript to update content background and text color
-            string js = $@"
-        document.body.style.backgroundColor = '{backgroundColor}';
-        document.body.style.color = '{textColor}';
-        Array.from(document.getElementsByTagName('a')).forEach(link => {{
-            link.style.color = '{textColor}';
-        }});
-    ";
-
-            ContentWebView.Eval(js);
-        }
-
-        // Listen for theme changes
-        protected override void OnAppearing()
-        {
-            base.OnAppearing();
-            Application.Current.RequestedThemeChanged += OnRequestedThemeChanged;
-            ApplyWebViewTheme(); // Apply the theme on initial load
-        }
-
-        protected override void OnDisappearing()
-        {
-            base.OnDisappearing();
-            Application.Current.RequestedThemeChanged -= OnRequestedThemeChanged;
-        }
-
-        private void OnRequestedThemeChanged(object sender, AppThemeChangedEventArgs e)
-        {
-            ApplyWebViewTheme();
-        }
-
-
     }
 }
