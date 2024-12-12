@@ -1,12 +1,37 @@
-﻿using System.Collections.ObjectModel;
+﻿using System;
+using System.ComponentModel;
+using System.Collections.ObjectModel;
 using System.Linq;
 
 namespace MauiApp1
 {
-    public class MainViewModel
+    public class MainViewModel : INotifyPropertyChanged
     {
         public ObservableCollection<Job> Items { get; set; }
-        public ObservableCollection<Job> FilteredItems { get; set; }
+        // Filtered collection of job items that match the search and filter criteria
+        private ObservableCollection<Job> _filteredItems;
+        public ObservableCollection<Job> FilteredItems
+        {
+            get => _filteredItems;
+            set
+            {
+                // Update the value of FilteredItems
+                _filteredItems = value;
+
+                // Notify the UI that FilteredItems has changed
+                OnPropertyChanged(nameof(FilteredItems));
+
+                // Notify the UI that HasResults and IsNoResults should be updated
+                OnPropertyChanged(nameof(HasResults));
+                OnPropertyChanged(nameof(IsNoResults));
+            }
+        }
+
+        // Indicates if there are results to display
+        public bool HasResults => FilteredItems.Any();
+
+        // Indicates if there are no results to display
+        public bool IsNoResults => !HasResults;
         public ObservableCollection<string> RegionOptions { get; set; }
 
         private readonly Dictionary<int, string> GeographyMapping = new()
@@ -57,12 +82,28 @@ namespace MauiApp1
             {
                 FilteredItems.Add(item);
             }
+
+            // Notify the UI that HasResults and IsNoResults may have changed
+            OnPropertyChanged(nameof(HasResults));
+            OnPropertyChanged(nameof(IsNoResults));
         }
 
         private bool MatchesRegion(Job job, string region)
         {
             return job.Geography != null &&
                    job.Geography.Any(id => GeographyMapping.TryGetValue(id, out var mappedRegion) && mappedRegion == region);
+        }
+
+        // Event to notify UI about property changes
+        public event PropertyChangedEventHandler PropertyChanged;
+
+        /// <summary>
+        /// Notifies the UI when a property changes.
+        /// </summary>
+        /// <param name="propertyName">The name of the property that changed.</param>
+        protected void OnPropertyChanged(string propertyName)
+        {
+            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
         }
     }
 }

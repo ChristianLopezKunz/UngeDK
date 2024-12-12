@@ -99,7 +99,7 @@ namespace MauiApp1
 
 
         private static readonly Dictionary<int, string> GeographyMapping = new Dictionary<int, string>
-    {
+        {
         { 2, "Storkøbenhavn" },
         { 3, "Nordsjælland" },
         { 14, "Østsjælland" },
@@ -114,7 +114,7 @@ namespace MauiApp1
         { 6, "Østjylland (Aarhus)" },
         { 8, "Nordjylland" },
         { 20, "Bornholm" }
-    };
+        };
 
         public string GeographyDisplay
         {

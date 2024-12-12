@@ -9,9 +9,9 @@
                Padding="30,0"
                Spacing="25">
             <Image Source="logo.png" 
-               HorizontalOptions="Center" 
-               VerticalOptions="CenterAndExpand"
-               WidthRequest="500" HeightRequest="250"/>
+                   HorizontalOptions="Center" 
+                   VerticalOptions="CenterAndExpand"
+                   WidthRequest="500" HeightRequest="250"/>
             
 
             <Label
@@ -23,41 +23,49 @@
             <Label/>
 
             <Frame BorderColor="{DynamicResource FrameBorderColor}" 
-                BackgroundColor="{DynamicResource FrameBackgroundColor}" 
-                CornerRadius="5" 
-                Padding="0" 
-                Margin="5" 
-                HasShadow="False">
+                   BackgroundColor="{DynamicResource FrameBackgroundColor}" 
+                   CornerRadius="5" 
+                   Padding="0" 
+                   Margin="5" 
+                   HasShadow="False">
                 <SearchBar Placeholder="Søg efter jobtitel, virksomhed, nøgleord..."
-               TextChanged="OnSearchTextChanged"
-               x:Name="SearchBarControl"
-               TextColor="{DynamicResource Text}" />
+                           TextChanged="OnSearchTextChanged"
+                           x:Name="SearchBarControl"
+                           TextColor="{DynamicResource Text}" />
             </Frame>
 
             <VerticalStackLayout Spacing="5">
                 <Label Text="Områder:" 
-                FontSize="16" 
-                FontAttributes="Bold" 
-                TextColor="{DynamicResource Text}" 
-                HorizontalOptions="Start" />
+                       FontSize="16" 
+                       FontAttributes="Bold" 
+                       TextColor="{DynamicResource Text}" 
+                       HorizontalOptions="Start" />
 
                 <Frame BorderColor="{DynamicResource FrameBorderColor}" 
-                BackgroundColor="{DynamicResource FrameBackgroundColor}" 
-                CornerRadius="5" 
-                Padding="0" 
-                Margin="5" 
-                HasShadow="False">
+                       BackgroundColor="{DynamicResource FrameBackgroundColor}" 
+                       CornerRadius="5" 
+                       Padding="0" 
+                       Margin="5" 
+                       HasShadow="False">
                     <Picker x:Name="RegionPicker"
-                ItemsSource="{Binding RegionOptions}"
-                SelectedIndexChanged="OnRegionFilterChanged"
-                TextColor="{DynamicResource Text}" />
+                            ItemsSource="{Binding RegionOptions}"
+                            SelectedIndexChanged="OnRegionFilterChanged"
+                            TextColor="{DynamicResource Text}" />
                 </Frame>
             </VerticalStackLayout>
 
+            <Label Text="Ingen resultater fundet."
+                   FontSize="16"
+                   FontAttributes="Bold"
+                   HorizontalOptions="Center"
+                   VerticalOptions="Center"
+                   IsVisible="{Binding IsNoResults}" 
+                   TextColor="{DynamicResource Text}" />
+
             <CollectionView x:Name="FilteredCollectionView"
-                ItemsSource="{Binding FilteredItems}"
-                SelectionMode="Single"
-                SelectionChanged="OnJobSelected">
+                            ItemsSource="{Binding FilteredItems}"
+                            SelectionMode="Single"
+                            SelectionChanged="OnJobSelected">
                 <CollectionView.ItemTemplate>
                     <DataTemplate>
                         <Frame BorderColor="{DynamicResource FrameBorderColor}" 
