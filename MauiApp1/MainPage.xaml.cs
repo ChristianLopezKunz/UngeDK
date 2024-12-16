@@ -54,47 +54,18 @@ namespace MauiApp1
             try
             {
                 await Task.Delay(300, _debounceCts.Token); // 300ms debounce
-                string searchText = e.NewTextValue?.Trim();
-                var selectedRegion = RegionPicker.SelectedItem?.ToString() ?? "Alle";
-                _viewModel.FilterItems(searchText, selectedRegion);
 
-                if (string.IsNullOrEmpty(searchText))
+                string searchText = e.NewTextValue?.Trim();
+
+                // Require at least 3 characters before triggering local filtering
+                if (string.IsNullOrEmpty(searchText) || searchText.Length < 3)
                 {
-                    _viewModel.FilterItems(""); // Show all jobs
+                    _viewModel.FilterItems(""); // Show all jobs if input is cleared
                     return;
                 }
 
-                // Perform local filtering first
-                _viewModel.FilterItems(searchText);
-
-                // If no local matches, fetch more from the API
-                if (!_viewModel.FilteredItems.Any())
-                {
-                    var jobList = await _apiService.GetJobsAsync(searchText, max: 50, page: 1);
-                    if (jobList != null && jobList.Status == "ok")
-                    {
-                        foreach (var job in jobList.Jobs)
-                        {
-                            if (!_viewModel.Items.Any(existing => existing.Id == job.Id)) // Check duplicates by Job ID
-                            {
-                                _viewModel.Items.Add(job);
-                            }
-                        }
-
-                        // Reapply filtering with the updated items
-                        _viewModel.FilterItems(searchText);
-                    }
-                    else
-                    {
-                        // If API returns no results
-                        _viewModel.FilteredItems.Clear();
-                        _viewModel.FilteredItems.Add(new Job
-                        {
-                            JobTitle = "Ingen resultater fundet.",
-                            CompanyName = string.Empty
-                        });
-                    }
-                }
+                var selectedRegion = RegionPicker.SelectedItem?.ToString() ?? "Alle";
+                _viewModel.FilterItems(searchText, selectedRegion);
             }
             catch (TaskCanceledException)
             {
@@ -112,6 +83,21 @@ namespace MauiApp1
 
             // Deselect the item
             ((CollectionView)sender).SelectedItem = null;
+        }
+
+        private void OnSearchButtonPressed(object sender, EventArgs e)
+        {
+            string searchText = SearchBarControl.Text?.Trim();
+
+            if (!string.IsNullOrEmpty(searchText))
+            {
+                // Add the search term to history
+                _viewModel.AddSearchTermToHistory(searchText);
+
+                // Perform filtering
+                var selectedRegion = RegionPicker.SelectedItem?.ToString() ?? "Alle";
+                _viewModel.FilterItems(searchText, selectedRegion);
+            }
         }
     }
 }

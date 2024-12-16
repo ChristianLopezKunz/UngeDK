@@ -2,6 +2,7 @@
 using System.ComponentModel;
 using System.Collections.ObjectModel;
 using System.Linq;
+using System.Text.Json;
 
 namespace MauiApp1
 {
@@ -10,6 +11,8 @@ namespace MauiApp1
         public ObservableCollection<Job> Items { get; set; }
         // Filtered collection of job items that match the search and filter criteria
         private ObservableCollection<Job> _filteredItems;
+        private ObservableCollection<string> _searchHistory = new();
+
         public ObservableCollection<Job> FilteredItems
         {
             get => _filteredItems;
@@ -24,6 +27,34 @@ namespace MauiApp1
                 // Notify the UI that HasResults and IsNoResults should be updated
                 OnPropertyChanged(nameof(HasResults));
                 OnPropertyChanged(nameof(IsNoResults));
+            }
+        }
+
+        public ObservableCollection<string> SearchHistory
+        {
+            get => _searchHistory;
+            set
+            {
+                _searchHistory = value;
+                OnPropertyChanged(nameof(SearchHistory));
+            }
+        }
+
+        private string _selectedSearchTerm;
+        public string SelectedSearchTerm
+        {
+            get => _selectedSearchTerm;
+            set
+            {
+                if (_selectedSearchTerm != value)
+                {
+                    _selectedSearchTerm = value;
+                    OnPropertyChanged(nameof(SelectedSearchTerm));
+
+                    // Trigger the search with the selected term
+                    if (!string.IsNullOrEmpty(value))
+                        FilterItems(value);
+                }
             }
         }
 
@@ -58,10 +89,13 @@ namespace MauiApp1
             Items = new ObservableCollection<Job>();
             FilteredItems = new ObservableCollection<Job>();
             RegionOptions = new ObservableCollection<string> { "Alle" };
+            SearchHistory = new ObservableCollection<string>();
             foreach (var regionName in GeographyMapping.Values.Distinct())
             {
                 RegionOptions.Add(regionName);
             }
+
+            LoadSearchHistory();
         }
 
         public void FilterItems(string searchText, string selectedRegion = "Alle")
@@ -104,6 +138,39 @@ namespace MauiApp1
         protected void OnPropertyChanged(string propertyName)
         {
             PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
+        }
+
+        public void AddSearchTermToHistory(string term)
+        {
+            if (!SearchHistory.Contains(term))
+            {
+                SearchHistory.Insert(0, term);
+
+                if (SearchHistory.Count > 20)
+                {
+                    SearchHistory.RemoveAt(SearchHistory.Count - 1);
+                }
+
+                SaveSearchHistory(); // Save updated history
+            }
+        }
+
+        public void SaveSearchHistory()
+        {
+            var historyJson = JsonSerializer.Serialize(SearchHistory);
+            Preferences.Set("SearchHistory", historyJson);
+        }
+
+        public void LoadSearchHistory()
+        {
+            if (Preferences.ContainsKey("SearchHistory"))
+            {
+                var historyJson = Preferences.Get("SearchHistory", string.Empty);
+                if (!string.IsNullOrEmpty(historyJson))
+                {
+                    SearchHistory = JsonSerializer.Deserialize<ObservableCollection<string>>(historyJson) ?? new ObservableCollection<string>();
+                }
+            }
         }
     }
 }

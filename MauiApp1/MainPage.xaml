@@ -22,17 +22,48 @@
 
             <Label/>
 
-            <Frame BorderColor="{DynamicResource FrameBorderColor}" 
-                   BackgroundColor="{DynamicResource FrameBackgroundColor}" 
-                   CornerRadius="5" 
-                   Padding="0" 
-                   Margin="5" 
-                   HasShadow="False">
-                <SearchBar Placeholder="Søg efter jobtitel, virksomhed, nøgleord..."
-                           TextChanged="OnSearchTextChanged"
-                           x:Name="SearchBarControl"
+            <Grid RowDefinitions="Auto, Auto">
+                <!-- SearchBar -->
+                <Frame Grid.Row="0"
+           BorderColor="{DynamicResource FrameBorderColor}" 
+           BackgroundColor="{DynamicResource FrameBackgroundColor}" 
+           CornerRadius="5" 
+           Padding="0" 
+           Margin="0" 
+           HasShadow="False">
+                    <SearchBar Placeholder="Søg efter jobtitel, virksomhed, nøgleord..."
+                               TextChanged="OnSearchTextChanged"
+                               SearchButtonPressed="OnSearchButtonPressed"
+                               x:Name="SearchBarControl"
+                               TextColor="{DynamicResource Text}" />
+                </Frame>
+
+                <!-- Search History -->
+                <CollectionView Grid.Row="1"
+                    ItemsSource="{Binding SearchHistory}"
+                    SelectionMode="Single"
+                    SelectedItem="{Binding SelectedSearchTerm, Mode=TwoWay}"
+                    Margin="0">
+                    <CollectionView.ItemsLayout>
+                        <LinearItemsLayout Orientation="Vertical" 
+                                ItemSpacing="0" />
+                    </CollectionView.ItemsLayout>
+                    <CollectionView.ItemTemplate>
+                        <DataTemplate>
+                            <Frame BorderColor="{DynamicResource FrameBorderColor}" 
+                       BackgroundColor="{DynamicResource FrameBackgroundColor}" 
+                       CornerRadius="5" 
+                       Padding="5" 
+                       Margin="0">
+                                <Label Text="{Binding}" 
+                           FontSize="14" 
                            TextColor="{DynamicResource Text}" />
-            </Frame>
+                            </Frame>
+                        </DataTemplate>
+                    </CollectionView.ItemTemplate>
+                </CollectionView>
+            </Grid>
+
 
             <VerticalStackLayout Spacing="5">
                 <Label Text="Områder:" 
