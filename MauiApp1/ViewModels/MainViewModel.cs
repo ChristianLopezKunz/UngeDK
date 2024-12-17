@@ -146,7 +146,7 @@ namespace MauiApp1
             {
                 SearchHistory.Insert(0, term);
 
-                if (SearchHistory.Count > 20)
+                if (SearchHistory.Count > 5)
                 {
                     SearchHistory.RemoveAt(SearchHistory.Count - 1);
                 }
