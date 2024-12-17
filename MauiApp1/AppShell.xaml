@@ -4,38 +4,28 @@
     xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
     xmlns:local="clr-namespace:MauiApp1"
-    Shell.FlyoutBehavior="Flyout"
-    Title="Unge DK"
-    Shell.BackgroundColor="{DynamicResource NavBarBackground}"
-    Shell.ForegroundColor="{DynamicResource NavBarForeground}"
+    Shell.FlyoutBehavior="Disabled"
     Shell.TabBarBackgroundColor="{DynamicResource NavBarBackground}"
     Shell.TabBarForegroundColor="{DynamicResource NavBarForeground}">
 
-    <!-- Main Page -->
-    <ShellContent
-        ContentTemplate="{DataTemplate local:MainPage}"
-        Route="MainPage" />
+    <!-- Bottom Tab Bar -->
+    <TabBar>
+        <!-- Main Page -->
+        <ShellContent
+            ContentTemplate="{DataTemplate local:MainPage}"
+            Icon="home.png"
+            Route="MainPage" />
 
-    <!-- Favorites Page -->
-    <ShellContent
-        ContentTemplate="{DataTemplate local:FavoritesPage}"
-        Route="FavoritesPage"
-        IsVisible="False" />
+        <!-- Favorites Page -->
+        <ShellContent
+            ContentTemplate="{DataTemplate local:FavoritesPage}"
+            Icon="heart.png"
+            Route="FavoritesPage" />
 
-    <!-- Menu Items -->
-    <MenuItem
-        Text="Hovedsiden"
-        IconImageSource="home.png"
-        Clicked="OnNavigateToMainPageClicked" />
-    
-    <MenuItem
-        Text="Dark/light Mode"
-        IconImageSource="sun_moon.png"
-        Clicked="OnToggleThemeButtonClicked" />
-
-    <MenuItem
-        Text="Vis Favoriter"
-        IconImageSource="heart.png"
-        Clicked="OnViewFavoritesClicked" />
-
+        <!-- Dark/Light Mode Toggle Page -->
+        <ShellContent
+            ContentTemplate="{DataTemplate local:ThemePage}"
+            Icon="sun_moon.png"
+            Route="ThemePage" />
+    </TabBar>
 </Shell>
