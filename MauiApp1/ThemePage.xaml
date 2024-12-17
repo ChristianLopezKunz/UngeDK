@@ -1,0 +1,15 @@
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="MauiApp1.ThemePage"
+             Title="Theme"
+             BackgroundColor="{DynamicResource Background}">
+
+    <VerticalStackLayout Padding="20" HorizontalOptions="Center" VerticalOptions="Center">
+        <Label Text="Toggle Dark/Light Mode"
+               FontSize="24"
+               HorizontalOptions="Center"
+               TextColor="{DynamicResource Text}" />
+
+        <Switch x:Name="ThemeSwitch" Toggled="OnThemeToggled" HorizontalOptions="Center" />
+    </VerticalStackLayout>
+</ContentPage>
