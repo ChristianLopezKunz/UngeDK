@@ -48,8 +48,8 @@
     <Color x:Key="FrameBackgroundColorDark">#1f1f1f</Color>
 
     <!-- Dynamic Resources -->
-    <SolidColorBrush x:Key="PrimaryBrush" Color="{DynamicResource Primary}" />
-    <SolidColorBrush x:Key="SecondaryBrush" Color="{DynamicResource Secondary}" />
+    <SolidColorBrush x:Key="PrimaryBrush" Color="Black"{DynamicResource Primary}" />
+    <SolidColorBrush x:Key="SecondaryBrush" Color="White"{DynamicResource Secondary}" />
     <SolidColorBrush x:Key="BackgroundBrush" Color="{DynamicResource Background}" />
     <SolidColorBrush x:Key="TextBrush" Color="{DynamicResource Text}" />
 </ResourceDictionary>
