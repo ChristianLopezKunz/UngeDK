@@ -57,8 +57,7 @@ namespace MauiApp1
 
                 string searchText = e.NewTextValue?.Trim();
 
-                // Require at least 3 characters before triggering local filtering
-                if (string.IsNullOrEmpty(searchText) || searchText.Length < 3)
+                if (string.IsNullOrEmpty(searchText))
                 {
                     _viewModel.FilterItems(""); // Show all jobs if input is cleared
                     return;
@@ -88,19 +87,22 @@ namespace MauiApp1
         private void OnSearchButtonPressed(object sender, EventArgs e)
         {
             var searchBar = (SearchBar)sender;
-            string searchText = SearchBarControl.Text?.Trim();
+            string searchText = searchBar.Text?.Trim();
+            var selectedRegion = RegionPicker.SelectedItem?.ToString() ?? "Alle";
 
             if (!string.IsNullOrEmpty(searchText))
             {
-                // Add the search term to history
-                _viewModel.AddSearchTermToHistory(searchText);
-
-                // Perform filtering
-                var selectedRegion = RegionPicker.SelectedItem?.ToString() ?? "Alle";
+                // Perform the search logic
                 _viewModel.FilterItems(searchText, selectedRegion);
+
+                // Add the search term to the history
+                _viewModel.AddSearchTermToHistory(searchText);
             }
 
-            searchBar.Text = string.Empty;
+            // Clear the search bar without triggering TextChanged logic
+            searchBar.TextChanged -= OnSearchTextChanged; // Temporarily detach TextChanged
+            searchBar.Text = string.Empty;               // Clear the search bar
+            searchBar.TextChanged += OnSearchTextChanged; // Reattach TextChanged
         }
     }
 }
