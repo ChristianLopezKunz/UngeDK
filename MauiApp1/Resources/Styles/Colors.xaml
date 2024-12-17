@@ -5,10 +5,10 @@
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml">
 
     <!-- Static Colors -->
-    <Color x:Key="Primary">#512BD4</Color>
+    <Color x:Key="Primary">#000000</Color>
     <Color x:Key="PrimaryDark">#ac99ea</Color>
     <Color x:Key="PrimaryDarkText">#242424</Color>
-    <Color x:Key="Secondary">#DFD8F7</Color>
+    <Color x:Key="Secondary">#FFFFFF</Color>
     <Color x:Key="SecondaryDarkText">#9880e5</Color>
     <Color x:Key="Tertiary">#2B0B98</Color>
 
@@ -48,8 +48,8 @@
     <Color x:Key="FrameBackgroundColorDark">#1f1f1f</Color>
 
     <!-- Dynamic Resources -->
-    <SolidColorBrush x:Key="PrimaryBrush" Color="Black"{DynamicResource Primary}" />
-    <SolidColorBrush x:Key="SecondaryBrush" Color="White"{DynamicResource Secondary}" />
+    <SolidColorBrush x:Key="PrimaryBrush" Color="{DynamicResource Primary}" />
+    <SolidColorBrush x:Key="SecondaryBrush" Color="{DynamicResource Secondary}" />
     <SolidColorBrush x:Key="BackgroundBrush" Color="{DynamicResource Background}" />
     <SolidColorBrush x:Key="TextBrush" Color="{DynamicResource Text}" />
 </ResourceDictionary>
