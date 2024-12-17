@@ -2,40 +2,55 @@
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="MauiApp1.FavoritesPage"
-             Title="">
+             Title="Favorit Jobs">
 
     <ContentPage.Content>
         <VerticalStackLayout Padding="20" Spacing="10">
-            <!-- Title -->
+            <!-- Page Title -->
             <Label Text="Favorit Jobs"
                    FontSize="30"
                    HorizontalOptions="Center"
                    Padding="10" />
 
-            <!-- CollectionView to Display Favorite Jobs -->
+            <!-- Favorites Collection -->
             <CollectionView x:Name="FavoritesCollectionView"
                             ItemsSource="{Binding Favorites}"
-                            SelectionMode="Single"
-                            SelectionChanged="OnJobSelected">
+                            SelectionMode="None">
+                <!-- Disable SelectionChanged -->
+
                 <CollectionView.ItemTemplate>
                     <DataTemplate>
-                        <Frame BorderColor="{DynamicResource FrameBorderColor}" 
+                        <Frame BorderColor="{DynamicResource FrameBorderColor}"
                                BackgroundColor="{DynamicResource FrameBackgroundColor}"
                                CornerRadius="5"
                                Padding="10"
                                Margin="8"
                                HasShadow="False">
+
+                            <!-- TapGestureRecognizer for Frame -->
+                            <Frame.GestureRecognizers>
+                                <TapGestureRecognizer Tapped="OnFrameTapped"
+                                                      CommandParameter="{Binding}" />
+                            </Frame.GestureRecognizers>
+
+                            <!-- Content -->
                             <StackLayout>
+                                <!-- Job Title -->
                                 <Label Text="{Binding JobTitle}" 
                                        FontSize="18" 
                                        FontAttributes="Bold" 
                                        TextColor="{DynamicResource Text}" />
+
+                                <!-- Company Info -->
                                 <Label Text="{Binding CompanyAndGeography}" 
                                        FontSize="14" 
                                        TextColor="{DynamicResource Text}" />
+
+                                <!-- Remove Button -->
                                 <Button Text="Fjern"
                                         Clicked="OnRemoveFavoriteClicked"
-                                        CommandParameter="{Binding .}" />
+                                        CommandParameter="{Binding}"
+                                        HorizontalOptions="End" />
                             </StackLayout>
                         </Frame>
                     </DataTemplate>

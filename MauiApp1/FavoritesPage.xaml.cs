@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.ObjectModel;
+using System.Collections.Specialized;
 using Microsoft.Maui.Controls;
 
 namespace MauiApp1
@@ -13,26 +14,40 @@ namespace MauiApp1
             InitializeComponent();
 
             // Bind FavoritesList from App.xaml.cs to the page
-            Favorites = App.FavoritesList;
+            Favorites = App.FavoritesList ?? new ObservableCollection<Job>();
             BindingContext = this; // Set the binding context to the page itself
 
             // Subscribe to changes in the Favorites list
             Favorites.CollectionChanged += OnFavoritesCollectionChanged;
         }
 
-        // Refresh UI if the favorites list changes
-        private void OnFavoritesCollectionChanged(object sender, System.Collections.Specialized.NotifyCollectionChangedEventArgs e)
+        // Unsubscribe when the page is disposed
+        protected override void OnDisappearing()
         {
-            // Notify the UI to refresh the binding
+            base.OnDisappearing();
+            Favorites.CollectionChanged -= OnFavoritesCollectionChanged;
+        }
+
+        // Refresh UI if the favorites list changes
+        private void OnFavoritesCollectionChanged(object sender, NotifyCollectionChangedEventArgs e)
+        {
+            // If necessary, notify the UI to refresh the binding
             OnPropertyChanged(nameof(Favorites));
         }
 
-        // Handle the "Remove" button click event with confirmation
+        private async void OnFrameTapped(object sender, TappedEventArgs e)
+        {
+            if (e.Parameter is Job selectedJob)
+            {
+                // Navigate to job details
+                await Navigation.PushAsync(new JobDetailsPage(selectedJob));
+            }
+        }
+
         private async void OnRemoveFavoriteClicked(object sender, EventArgs e)
         {
             if (sender is Button button && button.CommandParameter is Job job)
             {
-                // Display confirmation popup
                 bool confirm = await DisplayAlert(
                     "Bekræft Fjernelse",
                     $"Er du sikker på, at du vil fjerne \"{job.JobTitle}\" fra dine favoritter?",
@@ -40,16 +55,12 @@ namespace MauiApp1
 
                 if (confirm)
                 {
-                    // Remove the job from the list if confirmed
-                    if (Favorites.Contains(job))
-                    {
-                        Favorites.Remove(job);
-                    }
+                    Favorites.Remove(job);
                 }
             }
         }
 
-        // Handle job selection to navigate to the details page
+
         private async void OnJobSelected(object sender, SelectionChangedEventArgs e)
         {
             if (e.CurrentSelection.FirstOrDefault() is Job selectedJob)
@@ -57,8 +68,9 @@ namespace MauiApp1
                 await Navigation.PushAsync(new JobDetailsPage(selectedJob));
             }
 
-            // Deselect the item to avoid lingering selection
+            // Deselect the item
             ((CollectionView)sender).SelectedItem = null;
         }
+
     }
 }

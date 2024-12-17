@@ -92,30 +92,32 @@
                    TextColor="{DynamicResource Text}" />
 
             <CollectionView x:Name="FilteredCollectionView"
-                            ItemsSource="{Binding FilteredItems}"
-                            SelectionMode="Single"
-                            SelectionChanged="OnJobSelected">
+                ItemsSource="{Binding FilteredItems}"
+                SelectionMode="Single"
+                SelectionChanged="OnJobSelected">
                 <CollectionView.ItemTemplate>
                     <DataTemplate>
                         <Frame BorderColor="{DynamicResource FrameBorderColor}" 
-                               BackgroundColor="{DynamicResource FrameBackgroundColor}"
-                               CornerRadius="5"
-                               Padding="10"
-                               Margin="8"
-                               HasShadow="False">
+                   BackgroundColor="{DynamicResource FrameBackgroundColor}"
+                   CornerRadius="5"
+                   Padding="10"
+                   Margin="8"
+                   HasShadow="False"
+                   InputTransparent="True">
                             <StackLayout>
                                 <Label Text="{Binding JobTitle}" 
-                                       FontSize="18" 
-                                       FontAttributes="Bold" 
-                                       TextColor="{DynamicResource Text}" />
+                           FontSize="18" 
+                           FontAttributes="Bold" 
+                           TextColor="{DynamicResource Text}" />
                                 <Label Text="{Binding CompanyAndGeography}" 
-                                       FontSize="14" 
-                                       TextColor="{DynamicResource Text}" />
+                           FontSize="14" 
+                           TextColor="{DynamicResource Text}" />
                             </StackLayout>
                         </Frame>
                     </DataTemplate>
                 </CollectionView.ItemTemplate>
             </CollectionView>
+
         </VerticalStackLayout>
     </ScrollView>
 </ContentPage>
