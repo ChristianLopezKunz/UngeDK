@@ -50,6 +50,9 @@
                                 <Button Text="Fjern"
                                         Clicked="OnRemoveFavoriteClicked"
                                         CommandParameter="{Binding}"
+                                        BorderColor="{DynamicResource FrameBorderColor}"
+                                        BackgroundColor="{DynamicResource FrameBackgroundColor}"
+                                        TextColor="{DynamicResource Text}"
                                         HorizontalOptions="End" />
                             </StackLayout>
                         </Frame>
