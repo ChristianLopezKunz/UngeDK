@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="MauiApp1.MorePage"
+             BackgroundColor="{DynamicResource Background}">
+
+    <VerticalStackLayout Padding="20" Spacing="10">
+        <Label Text="Indstillinger"
+                   FontSize="30"
+                   HorizontalOptions="Center"
+                   Padding="10" />
+
+        <Button Text="Dark/Light Mode"
+                BackgroundColor="{DynamicResource Background}"
+                TextColor="{DynamicResource Text}"
+                FontAttributes="Bold"
+                Clicked="OnToggleThemeButtonClicked" />
+    </VerticalStackLayout>
+</ContentPage>

@@ -19,12 +19,22 @@ namespace MauiApp1
             }
         }
 
+        // Toggle Dark/Light Mode
         private void OnToggleThemeButtonClicked(object sender, EventArgs e)
         {
-            var currentTheme = Application.Current.RequestedTheme;
-            Application.Current.UserAppTheme = currentTheme == AppTheme.Dark ? AppTheme.Light : AppTheme.Dark;
+            try
+            {
+                // Toggle between Light and Dark themes
+                var currentTheme = Application.Current.UserAppTheme;
+                Application.Current.UserAppTheme =
+                    currentTheme == AppTheme.Dark ? AppTheme.Light : AppTheme.Dark;
 
-            FlyoutIsPresented = false;
+                Console.WriteLine($"Theme switched to: {Application.Current.UserAppTheme}");
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine($"Error toggling theme: {ex.Message}");
+            }
         }
 
         private async void OnViewFavoritesClicked(object sender, EventArgs e)

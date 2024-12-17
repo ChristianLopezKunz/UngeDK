@@ -86,6 +86,9 @@
 	  <MauiXaml Update="JobDetailsPage.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
+	  <MauiXaml Update="MorePage.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
 	  <MauiXaml Update="ThemePage.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>

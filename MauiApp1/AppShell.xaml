@@ -10,22 +10,28 @@
 
     <!-- Bottom Tab Bar -->
     <TabBar>
-        <!-- Main Page -->
+        <!-- Home Page -->
         <ShellContent
+            Title="Home"
             ContentTemplate="{DataTemplate local:MainPage}"
             Icon="home.png"
-            Route="MainPage" />
+            Route="MainPage"
+            Shell.NavBarIsVisible="False" />
 
         <!-- Favorites Page -->
         <ShellContent
+            Title="Favorites"
             ContentTemplate="{DataTemplate local:FavoritesPage}"
             Icon="heart.png"
-            Route="FavoritesPage" />
+            Route="FavoritesPage"
+            Shell.NavBarIsVisible="False" />
 
-        <!-- Dark/Light Mode Toggle Page -->
+        <!-- More Page -->
         <ShellContent
-            ContentTemplate="{DataTemplate local:ThemePage}"
-            Icon="sun_moon.png"
-            Route="ThemePage" />
+            Title="Mere"
+            ContentTemplate="{DataTemplate local:MorePage}"
+            Icon="cog.png"
+            Route="MorePage"
+            Shell.NavBarIsVisible="False" />
     </TabBar>
 </Shell>
