@@ -87,6 +87,7 @@ namespace MauiApp1
 
         private void OnSearchButtonPressed(object sender, EventArgs e)
         {
+            var searchBar = (SearchBar)sender;
             string searchText = SearchBarControl.Text?.Trim();
 
             if (!string.IsNullOrEmpty(searchText))
@@ -98,6 +99,8 @@ namespace MauiApp1
                 var selectedRegion = RegionPicker.SelectedItem?.ToString() ?? "Alle";
                 _viewModel.FilterItems(searchText, selectedRegion);
             }
+
+            searchBar.Text = string.Empty;
         }
     }
 }
