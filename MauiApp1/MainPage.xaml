@@ -24,49 +24,64 @@
 
             <Grid RowDefinitions="Auto, Auto">
                 <Frame Grid.Row="0"
-                       BorderColor="{DynamicResource FrameBorderColor}" 
-                       BackgroundColor="{DynamicResource FrameBackgroundColor}" 
-                       CornerRadius="5" 
-                       Padding="0" 
-                       Margin="0" 
-                       HasShadow="False">
+           BorderColor="{DynamicResource FrameBorderColor}" 
+           BackgroundColor="{DynamicResource FrameBackgroundColor}" 
+           CornerRadius="5" 
+           Padding="0" 
+           Margin="0" 
+           HasShadow="False">
                     <SearchBar Placeholder="Søg efter jobtitel, virksomhed, nøgleord..."
-                               TextChanged="OnSearchTextChanged"
-                               SearchButtonPressed="OnSearchButtonPressed"
-                               x:Name="SearchBarControl"
-                               TextColor="{DynamicResource Text}" />
+                   TextChanged="OnSearchTextChanged"
+                   SearchButtonPressed="OnSearchButtonPressed"
+                   x:Name="SearchBarControl"
+                   TextColor="{DynamicResource Text}" />
                 </Frame>
 
-                <CollectionView Grid.Row="1"
-                                ItemsSource="{Binding SearchHistory}"
-                                SelectionMode="Single"
-                                SelectedItem="{Binding SelectedSearchTerm, Mode=TwoWay}"
-                                Margin="0">
-                    <CollectionView.ItemsLayout>
-                        <LinearItemsLayout Orientation="Vertical" ItemSpacing="0" />
-                    </CollectionView.ItemsLayout>
-                    <CollectionView.ItemTemplate>
-                        <DataTemplate>
-                            <Frame BorderColor="{DynamicResource FrameBorderColor}" 
-                                   BackgroundColor="{DynamicResource FrameBackgroundColor}" 
-                                   CornerRadius="5" 
-                                   Padding="5" 
-                                   Margin="0">
-                                <Label Text="{Binding}" 
-                                       FontSize="14" 
-                                       TextColor="{DynamicResource Text}" />
-                            </Frame>
-                        </DataTemplate>
-                    </CollectionView.ItemTemplate>
-                </CollectionView>
+                <VerticalStackLayout Grid.Row="1"
+                         Spacing="0"
+                         Margin="0">
+                    <CollectionView ItemsSource="{Binding SearchHistory}"
+                        SelectionMode="Single"
+                        SelectedItem="{Binding SelectedSearchTerm, Mode=TwoWay}"
+                        Margin="0"
+                        IsVisible="{Binding IsSearchHistoryNotEmpty}">
+                        <CollectionView.ItemsLayout>
+                            <LinearItemsLayout Orientation="Vertical" ItemSpacing="0" />
+                        </CollectionView.ItemsLayout>
+                        <CollectionView.ItemTemplate>
+                            <DataTemplate>
+                                <Frame BorderColor="{DynamicResource FrameBorderColor}" 
+                           BackgroundColor="{DynamicResource FrameBackgroundColor}" 
+                           CornerRadius="5" 
+                           Padding="5" 
+                           Margin="0">
+                                    <Label Text="{Binding}" 
+                               FontSize="14" 
+                               TextColor="{DynamicResource Text}" />
+                                </Frame>
+                            </DataTemplate>
+                        </CollectionView.ItemTemplate>
+                    </CollectionView>
+
+                    <HorizontalStackLayout HorizontalOptions="End"
+                               Margin="5"
+                               IsVisible="{Binding IsSearchHistoryNotEmpty}">
+                        <Frame BorderColor="Transparent" 
+                           BackgroundColor="{DynamicResource FrameBackgroundColor}"
+                   CornerRadius="5" 
+                   Padding="0" 
+                   HasShadow="False">
+                            <Button Text="Ryd"
+                        Command="{Binding ClearSearchHistoryCommand}"
+                        BackgroundColor="{DynamicResource FrameBackgroundColor}" 
+                        TextColor="{DynamicResource Text}" 
+                        Padding="10,5" />
+                        </Frame>
+                    </HorizontalStackLayout>
+                </VerticalStackLayout>
             </Grid>
 
-            <Button Text="Ryd søgehistorik"
-                    Command="{Binding ClearSearchHistoryCommand}"
-                    IsVisible="{Binding IsSearchHistoryNotEmpty}"
-                    BackgroundColor="{DynamicResource FrameBackgroundColor}" 
-                    TextColor="{DynamicResource Text}" />
-            
+
             <VerticalStackLayout Spacing="5">
                 <Label Text="Områder:" 
                        FontSize="16" 
