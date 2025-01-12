@@ -38,13 +38,12 @@
                 </Frame>
 
                 <CollectionView Grid.Row="1"
-                    ItemsSource="{Binding SearchHistory}"
-                    SelectionMode="Single"
-                    SelectedItem="{Binding SelectedSearchTerm, Mode=TwoWay}"
-                    Margin="0">
+                                ItemsSource="{Binding SearchHistory}"
+                                SelectionMode="Single"
+                                SelectedItem="{Binding SelectedSearchTerm, Mode=TwoWay}"
+                                Margin="0">
                     <CollectionView.ItemsLayout>
-                        <LinearItemsLayout Orientation="Vertical" 
-                                ItemSpacing="0" />
+                        <LinearItemsLayout Orientation="Vertical" ItemSpacing="0" />
                     </CollectionView.ItemsLayout>
                     <CollectionView.ItemTemplate>
                         <DataTemplate>
@@ -62,7 +61,12 @@
                 </CollectionView>
             </Grid>
 
-
+            <Button Text="Ryd søgehistorik"
+                    Command="{Binding ClearSearchHistoryCommand}"
+                    IsVisible="{Binding IsSearchHistoryNotEmpty}"
+                    BackgroundColor="{DynamicResource FrameBackgroundColor}" 
+                    TextColor="{DynamicResource Text}" />
+            
             <VerticalStackLayout Spacing="5">
                 <Label Text="Områder:" 
                        FontSize="16" 
@@ -92,26 +96,26 @@
                    TextColor="{DynamicResource Text}" />
 
             <CollectionView x:Name="FilteredCollectionView"
-                ItemsSource="{Binding FilteredItems}"
-                SelectionMode="Single"
-                SelectionChanged="OnJobSelected">
+                            ItemsSource="{Binding FilteredItems}"
+                            SelectionMode="Single"
+                            SelectionChanged="OnJobSelected">
                 <CollectionView.ItemTemplate>
                     <DataTemplate>
                         <Frame BorderColor="{DynamicResource FrameBorderColor}" 
-                   BackgroundColor="{DynamicResource FrameBackgroundColor}"
-                   CornerRadius="5"
-                   Padding="10"
-                   Margin="8"
-                   HasShadow="False"
-                   InputTransparent="True">
+                               BackgroundColor="{DynamicResource FrameBackgroundColor}"
+                               CornerRadius="5"
+                               Padding="10"
+                               Margin="8"
+                               HasShadow="False"
+                               InputTransparent="True">
                             <StackLayout>
                                 <Label Text="{Binding JobTitle}" 
-                           FontSize="18" 
-                           FontAttributes="Bold" 
-                           TextColor="{DynamicResource Text}" />
+                                       FontSize="18" 
+                                       FontAttributes="Bold" 
+                                       TextColor="{DynamicResource Text}" />
                                 <Label Text="{Binding CompanyAndGeography}" 
-                           FontSize="14" 
-                           TextColor="{DynamicResource Text}" />
+                                       FontSize="14" 
+                                       TextColor="{DynamicResource Text}" />
                             </StackLayout>
                         </Frame>
                     </DataTemplate>

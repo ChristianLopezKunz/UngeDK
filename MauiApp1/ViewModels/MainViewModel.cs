@@ -3,6 +3,7 @@ using System.ComponentModel;
 using System.Collections.ObjectModel;
 using System.Linq;
 using System.Text.Json;
+using System.Windows.Input;
 
 namespace MauiApp1
 {
@@ -12,6 +13,7 @@ namespace MauiApp1
         // Filtered collection of job items that match the search and filter criteria
         private ObservableCollection<Job> _filteredItems;
         private ObservableCollection<string> _searchHistory = new();
+        public ICommand ClearSearchHistoryCommand { get; }
 
         public ObservableCollection<Job> FilteredItems
         {
@@ -58,6 +60,8 @@ namespace MauiApp1
             }
         }
 
+        public bool IsSearchHistoryNotEmpty => SearchHistory.Count > 0;
+
         // Indicates if there are results to display
         public bool HasResults => FilteredItems.Any();
 
@@ -90,6 +94,7 @@ namespace MauiApp1
             FilteredItems = new ObservableCollection<Job>();
             RegionOptions = new ObservableCollection<string> { "Alle" };
             SearchHistory = new ObservableCollection<string>();
+            ClearSearchHistoryCommand = new Command(ClearSearchHistory);
             foreach (var regionName in GeographyMapping.Values.Distinct())
             {
                 RegionOptions.Add(regionName);
@@ -152,6 +157,7 @@ namespace MauiApp1
                 }
 
                 SaveSearchHistory(); // Save updated history
+                OnPropertyChanged(nameof(IsSearchHistoryNotEmpty)); // Opdater UI
             }
         }
 
@@ -171,6 +177,19 @@ namespace MauiApp1
                     SearchHistory = JsonSerializer.Deserialize<ObservableCollection<string>>(historyJson) ?? new ObservableCollection<string>();
                 }
             }
+        }
+
+        public void ClearSearchHistory()
+        {
+            // Tøm søgehistorikken
+            SearchHistory.Clear();
+
+            // Gem ændringerne (tømmer lagret historik)
+            SaveSearchHistory();
+
+            // Notify UI about the change
+            OnPropertyChanged(nameof(SearchHistory));
+            OnPropertyChanged(nameof(IsSearchHistoryNotEmpty));
         }
     }
 }

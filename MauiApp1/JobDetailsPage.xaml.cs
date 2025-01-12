@@ -1,4 +1,5 @@
 ﻿using Microsoft.Maui.Controls;
+using System.Text.RegularExpressions;
 
 namespace MauiApp1
 {
@@ -32,10 +33,9 @@ namespace MauiApp1
                         detailedJob.Geography = basicJob.Geography;
                     }
 
-                    BindingContext = detailedJob;
+                    detailedJob.Content = HtmlToPlainText(detailedJob.Content);
 
-                    // Ensure Content is not null
-                    detailedJob.Content ??= "<p>No content available.</p>";
+                    BindingContext = detailedJob;
                 }
             }
             catch (Exception ex)
@@ -44,9 +44,6 @@ namespace MauiApp1
                 await DisplayAlert("Error", "An error occurred while fetching job details.", "OK");
             }
         }
-
-
-
 
         // Handle application URL button click
         private async void OnOpenApplicationUrlClicked(object sender, EventArgs e)
@@ -84,6 +81,23 @@ namespace MauiApp1
                     DisplayAlert("Allerede i favoriter", $"{job.JobTitle} er allerede i din favoriter.", "OK");
                 }
             }
+        }
+
+        private string HtmlToPlainText(string html)
+        {
+            if (string.IsNullOrWhiteSpace(html))
+                return string.Empty;
+
+            // Decode HTML entities
+            string plainText = System.Net.WebUtility.HtmlDecode(html);
+
+            // Remove HTML tags
+            plainText = Regex.Replace(plainText, "<.*?>", string.Empty);
+
+            // Normalize whitespace
+            plainText = Regex.Replace(plainText, @"\s+", " ").Trim();
+
+            return plainText;
         }
     }
 }
